@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.project_golf_piper_games.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_golf_piper_games.HelloController">
+   <children>
+      <TabPane layoutX="59.0" layoutY="47.0" prefHeight="616.0" prefWidth="822.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Person">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="personTable" prefHeight="364.0" prefWidth="822.0">
+                          <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="75.0" text="#" />
+                            <TableColumn fx:id="firstNameColumn" prefWidth="134.0" text="First name" />
+                              <TableColumn fx:id="lastNameColumn" prefWidth="224.0" text="Last name" />
+                              <TableColumn fx:id="nickNameColumn" prefWidth="227.0" text="Nick name" />
+                              <TableColumn fx:id="eMailColumn" prefWidth="161.0" text="E-mail" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="saveNewPersonButton" layoutX="188.0" layoutY="400.0" mnemonicParsing="false" onAction="#saveNewPersonButtonWasClicked" prefHeight="36.0" prefWidth="88.0" text="Add person" />
+                        <TextField fx:id="firstNameTextField" layoutX="14.0" layoutY="400.0" promptText="First name" />
+                        <TextField fx:id="lastNameTextField" layoutX="14.0" layoutY="443.0" promptText="Last name" />
+                        <TextField fx:id="nickNameTextField" layoutX="14.0" layoutY="483.0" promptText="Nick name"/>
+                        <TextField fx:id="eMailTextField" layoutX="14.0" layoutY="519.0" promptText="E-mail"/>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Employee">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

@@ -6,14 +6,23 @@
     <persistence-unit name="hibernate" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.example.project_golf_piper_games.Classes.Country</class>
-        <class>com.example.project_golf_piper_games.Controller.CountryController</class>
+        <class>com.example.project_golf_piper_games.Controller.countryController</class>
+        <class>com.example.project_golf_piper_games.Classes.Address</class>
+        <class>com.example.project_golf_piper_games.Classes.Employee</class>
+        <class>com.example.project_golf_piper_games.Classes.Game</class>
+        <class>com.example.project_golf_piper_games.Classes.Matchup1Vs1</class>
+        <class>com.example.project_golf_piper_games.Classes.MatchupTeamVsTeam</class>
+        <class>com.example.project_golf_piper_games.Classes.Person</class>
+        <class>com.example.project_golf_piper_games.Classes.Player</class>
+        <class>com.example.project_golf_piper_games.Classes.PostalAddress</class>
+        <class>com.example.project_golf_piper_games.Classes.Team</class>
 
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/piper_games_db?serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="Britaderas123"/>
+            <property name="javax.persistence.jdbc.password" value="*****"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

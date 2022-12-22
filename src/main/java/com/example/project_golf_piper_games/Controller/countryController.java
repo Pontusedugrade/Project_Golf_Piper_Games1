@@ -9,11 +9,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-public class CountryController {
+public class countryController {
 
     EntityManagerFactory entityManagerFactory = HelloApplication.ENTITY_MANAGER_FACTORY;
 
-    public CountryController(){
+    public countryController(){
     }
 
     public boolean addACountry(Country theCountry){
