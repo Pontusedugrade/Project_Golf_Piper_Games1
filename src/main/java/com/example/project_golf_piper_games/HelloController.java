@@ -30,7 +30,6 @@ public class HelloController implements Initializable {
     @FXML private TableColumn<Person, String> lastNameColumn;
     @FXML private TableColumn<Person, String> nickNameColumn;
     @FXML private TableColumn<Person, String> eMailColumn;
-    @FXML private TableColumn <Person, Address> addressColumn;
     @FXML private TextField firstNameTextField;
     @FXML private TextField lastNameTextField;
     @FXML private TextField nickNameTextField;
@@ -47,7 +46,6 @@ public class HelloController implements Initializable {
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
         nickNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("nickName"));
         eMailColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("mailAddress"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<Person, Address>("city"));
         personTable.getItems().setAll(getAllPersons());
 
         personTable.getSelectionModel().selectedItemProperty().addListener((observableValue, person, t1) -> {
