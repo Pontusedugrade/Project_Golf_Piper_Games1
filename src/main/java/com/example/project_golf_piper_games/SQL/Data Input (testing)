@@ -1,0 +1,46 @@
+INSERT INTO country (country_name)VALUES('USA');
+INSERT INTO country (country_name)VALUES('Sweden');
+INSERT INTO country (country_name)VALUES('Finland');
+INSERT INTO country (country_name)VALUES('Storbrittanien');
+INSERT INTO country (country_name)VALUES('Danmark');
+
+
+INSERT INTO postal_adress (country_id, city) VALUES (1, 'Silicon valley');
+INSERT INTO postal_adress (country_id, city) VALUES (2, 'Stockholm');
+INSERT INTO postal_adress (country_id, city) VALUES (3, 'Helsingfors');
+INSERT INTO postal_adress (country_id, city) VALUES (4, 'London');
+INSERT INTO postal_adress (country_id, city) VALUES (5, 'Köpenhamn');
+
+INSERT INTO adress (adress, zip, city_id) VALUES ('One Infinite Loop', '95014', 1);
+INSERT INTO adress (adress, zip, city_id) VALUES ('Pied Piper st', '95015', 1);
+INSERT INTO adress (adress, zip, city_id) VALUES ('Hooli st', '95016', 1);
+INSERT INTO adress (adress, zip, city_id) VALUES ('Drottninggatan', '56035', 2);
+INSERT INTO adress (adress, zip, city_id) VALUES ('Helsingforsgatan', '75320', 3);
+INSERT INTO adress (adress, zip, city_id) VALUES ('Regent St', '60032', 4);
+INSERT INTO adress (adress, zip, city_id) VALUES ('Köpenhamngatan', '32045', 5);
+
+
+
+
+INSERT INTO person (first_name, last_name, nick_name, e_mail, adress_id) VALUES ('Donald', 'Dunn', 'Jared', 'jared.dunn@piedpiper.com', 2);
+INSERT INTO person (first_name, last_name, nick_name, e_mail, adress_id) VALUES ('Nelson', 'Bighetti', 'Big Head', 'nelson.bighetti@piedpiper.com', 2);
+INSERT INTO person (first_name, last_name, nick_name, e_mail, adress_id) VALUES ('Tim', 'Cook', 'The cooker', 'tim.cook@apple.com', 1);
+INSERT INTO person (first_name, last_name, nick_name, e_mail, adress_id) VALUES ('Bertram', 'Gilfoyle', 'Gilfoyle', 'bertram.gilfoyle@piedpiper.com', 2);
+INSERT INTO person (first_name, last_name, nick_name, e_mail, adress_id) VALUES ('Dinesh', 'Dinesh', 'Chugtai', 'dinesh.chugtai@piedpiper.com', 2);
+INSERT INTO person (first_name, last_name, nick_name, e_mail, adress_id) VALUES ('Richard', 'Richard', 'Hendricks', 'richard.hendricks@piedpiper.com', 2);
+INSERT INTO person (first_name, last_name, nick_name, e_mail, adress_id) VALUES ('Gavin', 'evil-doer', 'Belson', 'gavin.belson@hooli.com', 3);
+
+
+INSERT INTO employee (person_id) VALUES (1);
+INSERT INTO employee (person_id) VALUES (4);
+INSERT INTO employee (person_id) VALUES (5);
+
+
+SELECT * FROM person;
+
+
+SELECT *
+FROM person
+LEFT JOIN adress
+ON person.adress_id = adress.adress_id
+ORDER BY person.first_name;
