@@ -14,8 +14,7 @@ public class Employee {
     @Column(name = "employee_id")
     private int employeeId;
 
-
-    //This is a foregin key  we need to know how to declare it.
+    //FK
     @OneToOne
     @JoinColumn(name = "person_id")
     private Person personId;

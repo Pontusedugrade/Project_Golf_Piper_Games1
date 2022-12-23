@@ -6,12 +6,9 @@ import javax.persistence.*;
 @Table(name = "country")
 public class Country {
 
-    @Column(name = "country_name")
-
     //Properties
-
+    @Column(name = "country_name")
     private String countryName;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "country_id")

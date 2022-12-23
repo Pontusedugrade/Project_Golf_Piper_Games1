@@ -1,6 +1,7 @@
 package com.example.project_golf_piper_games.Classes;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "player")
@@ -15,37 +16,38 @@ public class Player {
     @Column(name = "player_id")
     private int playerId;
 
-    //Foreign KEY:
-    @Column(name = "person_id")
-    private int personId;
+    // FKs:
+    @OneToOne
+    @JoinColumn(name = "person_id")
+    private Person personId;
 
-    //Foreign KEY:
-    @Column(name = "game_id")
-    private int gameId;
+    @ManyToMany
+    @JoinColumn(name = "game_id")
+    private List <Game> gameIds;
 
-    //Foreign KEY :
-    @Column(name = "team_id")
-    private int teamId;
+    @OneToOne
+    @JoinColumn(name = "team_id")
+    private Team teamId;
 
     //Constructor
-
     public Player() {
-
     }
 
-    public Player(int playerId, int personId, int gameId, int teamId) {
+    // The purpose of this constructor is when we need to register a player who isn't part of a team.
+    public Player(int playerId, Person personId, List<Game> gameIds) {
         this.playerId = playerId;
         this.personId = personId;
-        this.gameId = gameId;
+        this.gameIds = gameIds;
+    }
+
+    public Player(int playerId, Person personId, List<Game> gameIds, Team teamId) {
+        this.playerId = playerId;
+        this.personId = personId;
+        this.gameIds = gameIds;
         this.teamId = teamId;
     }
 
-    //METHODS
-
-
-    //GETTER AND SETTER METHODS
-
-
+    // Getters & Setters
     public int getPlayerId() {
         return playerId;
     }
@@ -54,38 +56,28 @@ public class Player {
         this.playerId = playerId;
     }
 
-    public int getPersonId() {
+    public Person getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(Person personId) {
         this.personId = personId;
     }
 
-    public int getGameId() {
-        return gameId;
+    public List<Game> getGameIds() {
+        return gameIds;
     }
 
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
+    public void setGameIds(List<Game> gameId) {
+        this.gameIds = gameId;
     }
 
-    public int getTeamId() {
+    public Team getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(Team teamId) {
         this.teamId = teamId;
-    }
-
-    @Override
-    public String toString() {
-        return "player{" +
-                "playerId=" + playerId +
-                ", personId=" + personId +
-                ", gameId=" + gameId +
-                ", teamId=" + teamId +
-                '}';
     }
 }
 

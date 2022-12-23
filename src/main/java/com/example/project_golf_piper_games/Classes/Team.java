@@ -1,13 +1,14 @@
 package com.example.project_golf_piper_games.Classes;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "team")
 
 public class Team {
 
-    //Properties
+    // Properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_id")
@@ -16,33 +17,28 @@ public class Team {
     @Column(name = "team_name")
     private String teamName;
 
-    //Foreign KEY
-    @Column(name = "game_id")
-    private int gameId;
+    // FKs
+    @ManyToOne
+    @JoinColumn(name = "game_id")
+    private Game gameId;
 
-    //Foreign KEY
+    @OneToMany
     @Column(name = "playerId")
-    private int playerId;
+    private List <Player> playerIds;
 
 
-    //Constructor
+    // Constructor
     public Team() {
-
     }
 
-    public Team(int teamId, String teamName, int gameId, int playerId) {
+    public Team(int teamId, String teamName, Game gameId, List<Player> playerIds) {
         this.teamId = teamId;
         this.teamName = teamName;
         this.gameId = gameId;
-        this.playerId = playerId;
+        this.playerIds = playerIds;
     }
 
-    //METHODS
-
-
-    //GETTER AND SETTER METHODS
-
-
+    // Getters & Setters
     public int getTeamId() {
         return teamId;
     }
@@ -59,20 +55,20 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public int getGameId() {
+    public Game getGameId() {
         return gameId;
     }
 
-    public void setGameId(int gameId) {
+    public void setGameId(Game gameId) {
         this.gameId = gameId;
     }
 
-    public int getPlayerId() {
-        return playerId;
+    public List<Player> getPlayerIds() {
+        return playerIds;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
+    public void setPlayerIds(List<Player> playerId) {
+        this.playerIds = playerId;
     }
 }
 
