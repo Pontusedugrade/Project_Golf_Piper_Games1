@@ -111,6 +111,7 @@ public class HelloController implements Initializable {
         return employees;
     }
 
+    // Maybe it's wrong to persist several properties in one transaction
     public boolean employeeAddingProcess(Country country, PostalAddress postalAddress, Address address, Person person, Employee employee){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
