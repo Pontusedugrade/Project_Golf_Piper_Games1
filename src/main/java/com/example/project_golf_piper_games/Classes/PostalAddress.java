@@ -24,11 +24,10 @@ public class PostalAddress {
     //Constructor
 
     public PostalAddress() {
-
     }
 
-    public PostalAddress(int cityId, int countryId, String city) {
-        this.cityId = cityId;
+    public PostalAddress(Country countryId, String city) {
+        this.countryId = countryId;
         this.city = city;
     }
 

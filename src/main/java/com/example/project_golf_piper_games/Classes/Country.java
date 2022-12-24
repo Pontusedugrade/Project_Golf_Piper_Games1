@@ -17,13 +17,14 @@ public class Country {
     // Constructor
 
     public Country() {
-
     }
 
-    public Country(String countryName, int countryId) {
+    public Country(String countryName) {
         this.countryName = countryName;
-        this.countryId = countryId;
     }
+
+
+
 
     //GET AND SET METHODS
 

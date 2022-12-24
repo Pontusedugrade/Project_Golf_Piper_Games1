@@ -12,10 +12,10 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "adress_id")
-    private int adressId;
+    private int addressId;
 
     @Column(name = "adress")
-    private String adress;
+    private String address;
 
     @Column(name = "zip")
     private int zip;
@@ -24,40 +24,32 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "city_id")
-    private PostalAddress CityId;
+    private PostalAddress cityId;
 
-    //Constructor
-
+    // Constructor
     public Address() {
-
     }
 
-    public Address(int adressId, String adress, int zip) {
-        this.adressId = adressId;
-        this.adress = adress;
+    public Address(String address, int zip, PostalAddress cityId) {
+        this.address = address;
         this.zip = zip;
-
+        this.cityId = cityId;
     }
 
-
-    // Methods
-
-
-    //SET AND GET METHODS
-    public int getAdressId() {
-        return adressId;
+    public int getAddressId() {
+        return addressId;
     }
 
-    public void setAdressId(int adressId) {
-        this.adressId = adressId;
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getZip() {
@@ -69,20 +61,10 @@ public class Address {
     }
 
     public PostalAddress getCityId() {
-        return CityId;
+        return cityId;
     }
 
     public void setCityId(PostalAddress cityId) {
-        CityId = cityId;
-    }
-
-    @Override
-    public String toString() {
-        return "address{" +
-                "adressId=" + adressId +
-                ", adress='" + adress + '\'' +
-                ", zip=" + zip +
-                ", CityId=" + CityId +
-                '}';
+        this.cityId = cityId;
     }
 }

@@ -32,6 +32,8 @@ public class Person {
 
 
     //Constructor
+    public Person() {
+    }
 
     public Person(String firstName, String lastName, String nickName, String eMail) {
         this.firstName = firstName;
@@ -39,26 +41,14 @@ public class Person {
         this.nickName = nickName;
         this.mailAddress = eMail;
     }
-    public Person(int personID, String firstName, String lastName, String nickName, String eMail) {
-        this.personID = personID;
+
+    public Person(String firstName, String lastName, String nickName, String mailAddress, Address addressId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickName = nickName;
-        this.mailAddress = eMail;
-
-
-
+        this.mailAddress = mailAddress;
+        this.addressId = addressId;
     }
-
-    public Person() {
-
-    }
-
-
-    //METHODS
-
-
-    //GETTER AND SETTER METHODS
 
     public int getPersonID() {
         return personID;
@@ -106,18 +96,6 @@ public class Person {
 
     public void setAddressId(Address addressId) {
         this.addressId = addressId;
-    }
-
-    @Override
-    public String toString() {
-        return "person{" +
-                "personID=" + personID +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", eMail='" + mailAddress + '\'' +
-                ", addressId=" + addressId +
-                '}';
     }
 }
 
