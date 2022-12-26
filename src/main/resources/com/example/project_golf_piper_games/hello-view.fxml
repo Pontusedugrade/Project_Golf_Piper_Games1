@@ -65,6 +65,8 @@
                 <TextField fx:id="cityTextField" layoutX="400.0" layoutY="400.0" promptText="City" />
                 <TextField fx:id="addressTextField" layoutX="400.0" layoutY="440.0" promptText="Address" />
                 <TextField fx:id="zipTextField" layoutX="400.0" layoutY="480.0" promptText="Zip Code" />
+                        <Button fx:id="deleteEmployeeButton" layoutX="680.0" layoutY="520.0" mnemonicParsing="false" onAction="#removeEmployee" prefHeight="45.0" prefWidth="114.0" text="Remove Employee" />
+                        <TextField fx:id="idColumnTextField" layoutX="575.0" layoutY="533.0" prefHeight="25.0" prefWidth="95.0" promptText="Employee Id" />
               </children>
             </AnchorPane>
           </content>

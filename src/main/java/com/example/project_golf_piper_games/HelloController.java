@@ -204,20 +204,21 @@ public class HelloController implements Initializable {
         });
     }
 
+    //Removing employee by employeeID-input
     public void removeEmployee(){
+        int columnId = Integer.parseInt(idColumnTextField.getText());
+        deleteEmployee(columnId);
+        employeeTable.getItems().setAll(getAllEmployees());
 
     }
-    //Method for deleting entity, not really sure how this is done yet
-    public void deleteEmployee(Employee employee) {
+
+    public void deleteEmployee(int columnId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-
-            // Call remove-method of the EntityManager on the rental-entity passed to the method to remove it
-            // from the managed objects.
-            Employee theEmployeeToRemove = entityManager.find(Employee.class, employee.getEmployeeId());
+            Employee theEmployeeToRemove = entityManager.find(Employee.class, columnId);
             entityManager.remove(theEmployeeToRemove);
             // Call flush-method of the EntityManager to write changes to the database.
             entityManager.flush();
