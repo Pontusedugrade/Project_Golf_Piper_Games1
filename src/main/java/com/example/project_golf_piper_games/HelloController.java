@@ -1,7 +1,6 @@
 package com.example.project_golf_piper_games;
 
 import com.example.project_golf_piper_games.Classes.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,9 +8,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.persistence.*;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class HelloController implements Initializable {
 
@@ -83,7 +83,7 @@ public class HelloController implements Initializable {
     private Button deleteEmployeeButton;
 
 
-    // FXML properties for the employee table.
+    // FXML properties for the player table.
 
     // Table view.
     @FXML
@@ -142,6 +142,80 @@ public class HelloController implements Initializable {
     @FXML
     private Button saveNewTeamPlayerButton;
 
+
+
+    // FXML properties to a matchup.
+
+    //Table view
+    @FXML
+    private TableView<Matchup1Vs1> matchup1Vs1Table;
+
+    //Columns
+    @FXML
+    private TableColumn<Matchup1Vs1, Integer> idColumnM1;
+    @FXML
+    private TableColumn<Matchup1Vs1, String> player1ColumnM1;
+    @FXML
+    private TableColumn<Matchup1Vs1, String> player2ColumnM1;
+    @FXML
+    private TableColumn<Matchup1Vs1, LocalDateTime> matchupDateColumnM1;
+    @FXML
+    private TableColumn<Matchup1Vs1, String> winnerColumnM1;
+    @FXML
+    private TableColumn<Matchup1Vs1, Integer> scorePlayer1ColumnM1;
+    @FXML
+    private TableColumn<Matchup1Vs1, Integer> scorePlayer2ColumnM1;
+    @FXML
+    private TableColumn<Matchup1Vs1, String> gameColumnM1;
+
+    // Text fields
+    @FXML
+    private TextField player1TextField;
+    @FXML
+    private TextField player2TextField;
+    @FXML
+    private TextField winnerM1TextField;
+    @FXML
+    private TextField gameTextFieldM1;
+    @FXML
+    private TextField player1ScoreTextField;
+    @FXML
+    private TextField player2ScoreTextField;
+    @FXML
+    private TextField matchup1vs1DateTextField;
+
+    // Buttons (Here we also want to add a button to edit the results of a game that has been played.
+
+    @FXML
+    private Button saveNewMatchup1Vs1Button;
+
+    //OBS! NEED TO CREATE A addMatchup1Vs1 METHOD To be called when the save button is clicked.
+
+
+    //FXML Mapping to Game
+
+    //Table View Game
+
+    @FXML
+    private TableView <Game> gameTable;
+
+    //Columns
+    @FXML
+    private TableColumn<Game, Integer> gameIdColumn;
+    @FXML
+    private TableColumn<Game, String> gameNameColumn;
+
+    //Text Fields
+    @FXML
+    private TextField gameNameTextField;
+
+    //Button
+    @FXML
+    private Button saveNewGame;
+
+
+
+
     // Tables mapping
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -172,9 +246,26 @@ public class HelloController implements Initializable {
         gameColumn.setCellValueFactory(new PropertyValueFactory<Player, String>("playerGameName"));
         teamColumn.setCellValueFactory(new PropertyValueFactory<Player, String>("playerTeamName"));
 
-        // View methods for employee and player.
+        //Matchup1Vs1 columns.
+        idColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, Integer>("matchup1Vs1Id"));
+        player1ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("player1"));
+        player2ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("player2"));
+        matchupDateColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, LocalDateTime>("matchupDate"));
+        winnerColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("winner"));
+        scorePlayer1ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, Integer>("player1Score"));
+        scorePlayer2ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, Integer>("player2Score"));
+        gameColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("game"));
+
+        //Game columns
+        gameIdColumn.setCellValueFactory(new PropertyValueFactory<Game, Integer>("gameId"));
+        gameNameColumn.setCellValueFactory(new PropertyValueFactory<Game, String>("gameName"));
+
+
+        // View methods for employee and player and matchup1Vs1.
         employeeTable.getItems().setAll(getAllEmployees());
         playerTable.getItems().setAll(getAllPlayers());
+        matchup1Vs1Table.getItems().setAll(getAllMatchup1Vs1s());
+        gameTable.getItems().setAll(getAllGames());
 
         // Employee text fields.
         employeeTable.getSelectionModel().selectedItemProperty().addListener((observableValue, employee, t1) -> {
@@ -202,14 +293,40 @@ public class HelloController implements Initializable {
             gameTextField.setText(playerTable.getSelectionModel().getSelectedItem().getGameId().getGameName());
             teamTextField.setText(playerTable.getSelectionModel().getSelectedItem().getTeamId().getTeamName());
         });
+
+        //Matchup1Vs1 text fields.
+        matchup1Vs1Table.getSelectionModel().selectedItemProperty().addListener((observableValue, matchup1Vs1, t1) -> {
+            player1TextField.setText(matchup1Vs1Table.getSelectionModel().getSelectedItem().getPlayer1Id().getPlayerNickName());
+            player2TextField.setText(matchup1Vs1Table.getSelectionModel().getSelectedItem().getPlayer2Id().getPlayerNickName());
+            gameTextFieldM1.setText(matchup1Vs1Table.getSelectionModel().getSelectedItem().getGameId().getGameName());
+            player1ScoreTextField.setText(String.valueOf(matchup1Vs1Table.getSelectionModel().getSelectedItem().getPlayer1Score()));
+            player2ScoreTextField.setText(String.valueOf(matchup1Vs1Table.getSelectionModel().getSelectedItem().getPlayer2Score()));
+            // Here I created and used a formatter method to turn LocalDateTime to String.
+            matchup1vs1DateTextField.setText(localDateTimeToString(matchup1Vs1Table.getSelectionModel().getSelectedItem().getDateTime()));
+            winnerM1TextField.setText(matchup1Vs1Table.getSelectionModel().getSelectedItem().getWinnerId().getPlayerNickName());
+        });
+
+        //Game text fields.
+
+        gameTable.getSelectionModel().selectedItemProperty().addListener((observableValue, game, t1) -> {
+            gameNameTextField.setText(gameTable.getSelectionModel().getSelectedItem().getGameName());
+        });
     }
+
+
+    //Date to string formatter method.
+    public String localDateTimeToString(LocalDateTime theLocalDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm");
+        String dateAsString = theLocalDateTime.format(formatter);
+        return dateAsString;
+    }
+
 
     //Removing employee by employeeID-input
     public void removeEmployee(){
         int columnId = Integer.parseInt(idColumnTextField.getText());
         deleteEmployee(columnId);
         employeeTable.getItems().setAll(getAllEmployees());
-
     }
 
     public void deleteEmployee(int columnId) {
@@ -299,6 +416,74 @@ public class HelloController implements Initializable {
         saveSoloPlayer(newCountry, newPostalAddress, newAddress, newPerson, newGame, newPlayer);
     }
 
+    public void addMatchup1Vs1() {
+
+        //Create two players and get their object that is already created from the player id in the database.
+        Player player1 = getPlayer(Integer.parseInt(player1TextField.getText()));
+        Player player2 = getPlayer(Integer.parseInt(player2TextField.getText()));
+        Player winner = getPlayer(Integer.parseInt(player2TextField.getText()));
+
+        //Game from the database. Search by the id written in the "Game id" box in the program.
+        Game game = getGame(Integer.parseInt(gameTextField.getText()));
+
+        Matchup1Vs1 newMatchup1Vs1 = new Matchup1Vs1(LocalDateTime.parse(matchup1vs1DateTextField.getText()), Integer.parseInt(player1ScoreTextField.getText()),
+                Integer.parseInt(player2ScoreTextField.getText()), player1, player2, winner, game);
+
+        saveMatchup1Vs1(newMatchup1Vs1);
+    }
+
+    public void addGame(){
+        Game newGame = new Game(gameNameColumn.getText());
+
+        saveGame(newGame);
+    }
+
+    // Method created to get a player object that is created and add it to the constructor of the matchup1Vs1 and later a similar method
+    // should be able to be created to make a teamVsTeam constructor..
+    public Player getPlayer(int playerColumnId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+
+        Player playerToGet = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            playerToGet = entityManager.find(Player.class, playerColumnId);
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return playerToGet;
+    }
+
+    // Method to get Game based on the Game id from the database.
+    public Game getGame(int gameColumnId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+
+        Game gameToGet = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            gameToGet = entityManager.find(Game.class, gameColumnId);
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return gameToGet;
+    }
+
+
     // Same concept as the saveEmployee method.
     public void saveTeamPlayer(Country country, PostalAddress postalAddress, Address address, Person person, Game
             game, Team team, Player player) {
@@ -340,6 +525,46 @@ public class HelloController implements Initializable {
             entityManager.persist(person);
             entityManager.persist(game);
             entityManager.persist(player);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    public void saveMatchup1Vs1(Matchup1Vs1 theMatchup1Vs1) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+
+            entityManager.persist(theMatchup1Vs1);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    public void saveGame(Game theGame){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+
+            entityManager.persist(theGame);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -395,6 +620,52 @@ public class HelloController implements Initializable {
             entityManager.close();
         }
         return players;
+    }
+
+    // Method as follows created with above methods as pattern.
+    public List<Matchup1Vs1> getAllMatchup1Vs1s() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+        List<Matchup1Vs1> matchup1Vs1s = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            TypedQuery<Matchup1Vs1> allMatchup1Vs1sQuery = entityManager.createQuery("from Matchup1Vs1 ", Matchup1Vs1.class);
+            matchup1Vs1s = allMatchup1Vs1sQuery.getResultList();
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return matchup1Vs1s;
+    }
+
+    private List<Game> getAllGames() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+        List<Game> games = null;
+
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            TypedQuery<Game> allGamesQuery = entityManager.createQuery("from Game ", Game.class);
+            games = allGamesQuery.getResultList();
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return games;
     }
 
 

@@ -45,9 +45,8 @@ public class Matchup1Vs1 {
     public Matchup1Vs1() {
     }
 
-    public Matchup1Vs1(LocalDateTime dateTime, int matchup1vs1Id, int player1Score, int player2Score, Player player1Id, Player player2Id, Player winnerId, Game gameId) {
+    public Matchup1Vs1(LocalDateTime dateTime, int player1Score, int player2Score, Player player1Id, Player player2Id, Player winnerId, Game gameId) {
         this.dateTime = dateTime;
-        this.matchup1vs1Id = matchup1vs1Id;
         this.player1Score = player1Score;
         this.player2Score = player2Score;
         this.player1Id = player1Id;
