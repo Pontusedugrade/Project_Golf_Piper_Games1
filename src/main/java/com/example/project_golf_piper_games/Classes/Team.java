@@ -1,6 +1,7 @@
 package com.example.project_golf_piper_games.Classes;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,18 +25,16 @@ public class Team {
 
     @OneToMany
     @Column(name = "playerId")
-    private List <Player> playerIds;
+    private List <Player> teamMembers = new ArrayList<>();
 
 
     // Constructor
     public Team() {
     }
 
-    public Team(int teamId, String teamName, Game gameId, List<Player> playerIds) {
-        this.teamId = teamId;
+    public Team(String teamName, Game gameId) {
         this.teamName = teamName;
         this.gameId = gameId;
-        this.playerIds = playerIds;
     }
 
     // Getters & Setters
@@ -63,12 +62,12 @@ public class Team {
         this.gameId = gameId;
     }
 
-    public List<Player> getPlayerIds() {
-        return playerIds;
+    public List<Player> getTeamMembers() {
+        return teamMembers;
     }
 
-    public void setPlayerIds(List<Player> playerId) {
-        this.playerIds = playerId;
+    public void addTeamMembers(Player player) {
+        this.teamMembers.add(player);
     }
 }
 

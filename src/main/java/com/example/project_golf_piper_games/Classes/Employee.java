@@ -19,6 +19,8 @@ public class Employee {
     @JoinColumn(name = "person_id")
     private Person personId;
 
+    //private String firstName;
+
     //Constructor
     public Employee() {
 
@@ -28,6 +30,8 @@ public class Employee {
         this.personId = personId;
 
     }
+
+
 
     //METHODS
 
@@ -50,5 +54,9 @@ public class Employee {
     public void setPersonId(Person personId) {
         this.personId = personId;
     }
+
+    /*public String getFirstName() {
+        return this.personId.getFirstName();
+    }*/
 }
 

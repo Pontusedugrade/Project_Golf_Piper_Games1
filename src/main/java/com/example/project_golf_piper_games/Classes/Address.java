@@ -67,4 +67,5 @@ public class Address {
     public void setCityId(PostalAddress cityId) {
         this.cityId = cityId;
     }
+
 }

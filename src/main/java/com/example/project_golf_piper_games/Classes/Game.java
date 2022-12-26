@@ -14,7 +14,7 @@ public class Game {
     private int gameId;
 
     @Column(name = "name")
-    private String name;
+    private String gameName;
 
     //Constructor
 
@@ -22,9 +22,8 @@ public class Game {
 
     }
 
-    public Game(int gameId, String name) {
-        this.gameId = gameId;
-        this.name = name;
+    public Game(String gameName) {
+        this.gameName = gameName;
     }
 
     //METHODS
@@ -40,11 +39,11 @@ public class Game {
         this.gameId = gameId;
     }
 
-    public String getName() {
-        return name;
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 }

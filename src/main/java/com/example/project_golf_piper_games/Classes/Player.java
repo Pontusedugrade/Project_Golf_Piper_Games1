@@ -21,9 +21,9 @@ public class Player {
     @JoinColumn(name = "person_id")
     private Person personId;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "game_id")
-    private List <Game> gameIds;
+    private Game gameId;
 
     @OneToOne
     @JoinColumn(name = "team_id")
@@ -33,21 +33,12 @@ public class Player {
     public Player() {
     }
 
-    // The purpose of this constructor is when we need to register a player who isn't part of a team.
-    public Player(int playerId, Person personId, List<Game> gameIds) {
+    public Player(int playerId, Person personId, Game gameId) {
         this.playerId = playerId;
         this.personId = personId;
-        this.gameIds = gameIds;
+        this.gameId = gameId;
     }
 
-    public Player(int playerId, Person personId, List<Game> gameIds, Team teamId) {
-        this.playerId = playerId;
-        this.personId = personId;
-        this.gameIds = gameIds;
-        this.teamId = teamId;
-    }
-
-    // Getters & Setters
     public int getPlayerId() {
         return playerId;
     }
@@ -64,12 +55,12 @@ public class Player {
         this.personId = personId;
     }
 
-    public List<Game> getGameIds() {
-        return gameIds;
+    public Game getGameId() {
+        return gameId;
     }
 
-    public void setGameIds(List<Game> gameId) {
-        this.gameIds = gameId;
+    public void setGameId(Game gameId) {
+        this.gameId = gameId;
     }
 
     public Team getTeamId() {
