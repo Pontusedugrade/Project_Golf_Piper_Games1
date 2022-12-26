@@ -55,8 +55,36 @@ public class Employee {
         this.personId = personId;
     }
 
-    /*public String getFirstName() {
+    public String getEmployeeFirstName() {
         return this.personId.getFirstName();
-    }*/
+    }
+
+    public String getEmployeeLastName(){
+        return this.personId.getLastName();
+    }
+
+    public String getEmployeeNickName(){
+        return this.personId.getNickName();
+    }
+
+    public String getEmployeeMailAddress(){
+        return this.personId.getMailAddress();
+    }
+
+    public String getEmployeeAddress(){
+        return this.personId.getAddressId().getAddress();
+    }
+
+    public int getEmployeeZip(){
+        return this.personId.getAddressId().getZip();
+    }
+
+    public String getEmployeeCity(){
+        return this.personId.getAddressId().getCityId().getCity();
+    }
+
+    public String getEmployeeCountry(){
+        return this.personId.getAddressId().getCityId().getCountryId().getCountryName();
+    }
 }
 

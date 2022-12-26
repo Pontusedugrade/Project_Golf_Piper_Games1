@@ -78,5 +78,45 @@ public class Player {
     public void setTeamId(Team teamId) {
         this.teamId = teamId;
     }
+
+    public String getPlayerFirstName() {
+        return this.personId.getFirstName();
+    }
+
+    public String getPlayerLastName(){
+        return this.personId.getLastName();
+    }
+
+    public String getPlayerNickName(){
+        return this.personId.getNickName();
+    }
+
+    public String getPlayerMailAddress(){
+        return this.personId.getMailAddress();
+    }
+
+    public String getPlayerAddress(){
+        return this.personId.getAddressId().getAddress();
+    }
+
+    public int getPlayerZip(){
+        return this.personId.getAddressId().getZip();
+    }
+
+    public String getPlayerCity(){
+        return this.personId.getAddressId().getCityId().getCity();
+    }
+
+    public String getPlayerCountry(){
+        return this.personId.getAddressId().getCityId().getCountryId().getCountryName();
+    }
+
+    public String getPlayerTeamName(){
+        return this.teamId.getTeamName();
+    }
+
+    public String getPlayerGameName(){
+        return this.gameId.getGameName();
+    }
 }
 

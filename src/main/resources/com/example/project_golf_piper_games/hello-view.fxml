@@ -8,9 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0"
-            prefWidth="929.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.project_golf_piper_games.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_golf_piper_games.HelloController">
   <children>
     <TabPane layoutX="59.0" layoutY="47.0" prefHeight="616.0" prefWidth="822.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
@@ -47,28 +45,26 @@
               <children>
                 <TableView fx:id="employeeTable" prefHeight="364.0" prefWidth="999.0">
                   <columns>
-                    <TableColumn fx:id="idColumn" prefWidth="75.0" text="#"/>
-                    <TableColumn fx:id="firstNameColumn" prefWidth="134.0" text="First name"/>
-                    <TableColumn fx:id="lastNameColumn" prefWidth="224.0" text="Last name"/>
-                    <TableColumn fx:id="nickNameColumn" prefWidth="227.0" text="Nick name"/>
-                    <TableColumn fx:id="eMailColumn" prefWidth="161.0" text="E-mail"/>
-                    <TableColumn fx:id="countryColumn" prefWidth="227.0" text="Country"/>
-                    <TableColumn fx:id="cityColumn" prefWidth="227.0" text="City"/>
-                    <TableColumn fx:id="addressColumn" prefWidth="227.0" text="Address"/>
-                    <TableColumn fx:id="zipColumn" prefWidth="227.0" text="Zip Code"/>
+                    <TableColumn fx:id="idColumn" prefWidth="38.0" text="#" />
+                    <TableColumn fx:id="firstNameColumn" prefWidth="81.0" text="First name" />
+                    <TableColumn fx:id="lastNameColumn" prefWidth="86.0" text="Last name" />
+                    <TableColumn fx:id="nickNameColumn" prefWidth="83.0" text="Nick name" />
+                    <TableColumn fx:id="eMailColumn" prefWidth="133.0" text="E-mail" />
+                    <TableColumn fx:id="countryColumn" prefWidth="86.0" text="Country" />
+                    <TableColumn fx:id="cityColumn" prefWidth="96.0" text="City" />
+                    <TableColumn fx:id="addressColumn" prefWidth="111.0" text="Address" />
+                    <TableColumn fx:id="zipColumn" prefWidth="107.0" text="Zip Code" />
                   </columns>
                 </TableView>
-                <Button fx:id="saveNewEmployeeButton" layoutX="220.0" layoutY="400.0"
-                        mnemonicParsing="false" onAction="#addEmployee"
-                        prefHeight="36.0" prefWidth="96.0" text="Add employee"/>
-                <TextField fx:id="firstNameTextField" layoutX="01.0" layoutY="400.0" promptText="First name"/>
-                <TextField fx:id="lastNameTextField" layoutX="01.0" layoutY="440.0" promptText="Last name"/>
-                <TextField fx:id="nickNameTextField" layoutX="01.0" layoutY="480.0" promptText="Nick name"/>
-                <TextField fx:id="eMailTextField" layoutX="01.0" layoutY="520.0" promptText="E-mail"/>
-                <TextField fx:id="countryTextField" layoutX="01.0" layoutY="560.0" promptText="Country"/>
-                <TextField fx:id="cityTextField" layoutX="400.0" layoutY="400.0" promptText="City"/>
-                <TextField fx:id="addressTextField" layoutX="400.0" layoutY="440.0" promptText="Address"/>
-                <TextField fx:id="zipTextField" layoutX="400.0" layoutY="480.0" promptText="Zip Code"/>
+                <Button fx:id="saveNewEmployeeButton" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="36.0" prefWidth="96.0" text="Add employee" />
+                <TextField fx:id="firstNameTextField" layoutX="01.0" layoutY="400.0" promptText="First name" />
+                <TextField fx:id="lastNameTextField" layoutX="01.0" layoutY="440.0" promptText="Last name" />
+                <TextField fx:id="nickNameTextField" layoutX="01.0" layoutY="480.0" promptText="Nick name" />
+                <TextField fx:id="eMailTextField" layoutX="01.0" layoutY="520.0" promptText="E-mail" />
+                <TextField fx:id="countryTextField" layoutX="01.0" layoutY="560.0" promptText="Country" />
+                <TextField fx:id="cityTextField" layoutX="400.0" layoutY="400.0" promptText="City" />
+                <TextField fx:id="addressTextField" layoutX="400.0" layoutY="440.0" promptText="Address" />
+                <TextField fx:id="zipTextField" layoutX="400.0" layoutY="480.0" promptText="Zip Code" />
               </children>
             </AnchorPane>
           </content>
@@ -80,35 +76,31 @@
               <children>
                 <TableView fx:id="playerTable" prefHeight="364.0" prefWidth="999.0">
                   <columns>
-                    <TableColumn fx:id="idColumnP" prefWidth="75.0" text="#"/>
-                    <TableColumn fx:id="firstNameColumnP" prefWidth="134.0" text="First name"/>
-                    <TableColumn fx:id="lastNameColumnP" prefWidth="224.0" text="Last name"/>
-                    <TableColumn fx:id="nickNameColumnP" prefWidth="227.0" text="Nick name"/>
-                    <TableColumn fx:id="eMailColumnP" prefWidth="161.0" text="E-mail"/>
-                    <TableColumn fx:id="countryColumnP" prefWidth="227.0" text="Country"/>
-                    <TableColumn fx:id="cityColumnP" prefWidth="227.0" text="City"/>
-                    <TableColumn fx:id="addressColumnP" prefWidth="227.0" text="Address"/>
-                    <TableColumn fx:id="zipColumnP" prefWidth="227.0" text="Zip Code"/>
-                    <TableColumn fx:id="gameColumn" prefWidth="227.0" text="Game"/>
-                    <TableColumn fx:id="teamColumn" prefWidth="227.0" text="Team"/>
+                    <TableColumn fx:id="idColumnP" prefWidth="39.0" text="#" />
+                    <TableColumn fx:id="firstNameColumnP" prefWidth="64.0" text="First name" />
+                    <TableColumn fx:id="lastNameColumnP" prefWidth="77.0" text="Last name" />
+                    <TableColumn fx:id="nickNameColumnP" prefWidth="85.0" text="Nick name" />
+                    <TableColumn fx:id="eMailColumnP" prefWidth="72.0" text="E-mail" />
+                    <TableColumn fx:id="countryColumnP" prefWidth="86.0" text="Country" />
+                    <TableColumn fx:id="cityColumnP" prefWidth="71.0" text="City" />
+                    <TableColumn fx:id="addressColumnP" prefWidth="65.0" text="Address" />
+                    <TableColumn fx:id="zipColumnP" prefWidth="73.0" text="Zip Code" />
+                    <TableColumn fx:id="gameColumn" prefWidth="85.0" text="Game" />
+                    <TableColumn fx:id="teamColumn" prefWidth="103.0" text="Team" />
                   </columns>
                 </TableView>
-                <Button fx:id="saveNewSoloPlayerButton" layoutX="220.0" layoutY="400.0"
-                        mnemonicParsing="false" onAction="#addSoloPlayer"
-                        prefHeight="36.0" prefWidth="96.0" text="Add solo player"/>
-                <Button fx:id="saveNewTeamPlayerButton" layoutX="220.0" layoutY="440.0"
-                        mnemonicParsing="false" onAction="#addTeamPlayer"
-                        prefHeight="36.0" prefWidth="96.0" text="Add team player"/>
-                <TextField fx:id="firstNameTextFieldP" layoutX="01.0" layoutY="400.0" promptText="First name"/>
-                <TextField fx:id="lastNameTextFieldP" layoutX="01.0" layoutY="440.0" promptText="Last name"/>
-                <TextField fx:id="nickNameTextFieldP" layoutX="01.0" layoutY="480.0" promptText="Nick name"/>
-                <TextField fx:id="eMailTextFieldP" layoutX="01.0" layoutY="520.0" promptText="E-mail"/>
-                <TextField fx:id="countryTextFieldP" layoutX="01.0" layoutY="560.0" promptText="Country"/>
-                <TextField fx:id="cityTextFieldP" layoutX="400.0" layoutY="400.0" promptText="City"/>
-                <TextField fx:id="addressTextFieldP" layoutX="400.0" layoutY="440.0" promptText="Address"/>
-                <TextField fx:id="zipTextFieldP" layoutX="400.0" layoutY="480.0" promptText="Zip Code"/>
-                <TextField fx:id="gameTextField" layoutX="400.0" layoutY="520.0" promptText="Game"/>
-                <TextField fx:id="teamTextField" layoutX="400.0" layoutY="560.0" promptText="Team"/>
+                <Button fx:id="saveNewSoloPlayerButton" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addSoloPlayer" prefHeight="36.0" prefWidth="96.0" text="Add solo player" />
+                <Button fx:id="saveNewTeamPlayerButton" layoutX="220.0" layoutY="440.0" mnemonicParsing="false" onAction="#addTeamPlayer" prefHeight="36.0" prefWidth="96.0" text="Add team player" />
+                <TextField fx:id="firstNameTextFieldP" layoutX="01.0" layoutY="400.0" promptText="First name" />
+                <TextField fx:id="lastNameTextFieldP" layoutX="01.0" layoutY="440.0" promptText="Last name" />
+                <TextField fx:id="nickNameTextFieldP" layoutX="01.0" layoutY="480.0" promptText="Nick name" />
+                <TextField fx:id="eMailTextFieldP" layoutX="01.0" layoutY="520.0" promptText="E-mail" />
+                <TextField fx:id="countryTextFieldP" layoutX="01.0" layoutY="560.0" promptText="Country" />
+                <TextField fx:id="cityTextFieldP" layoutX="400.0" layoutY="400.0" promptText="City" />
+                <TextField fx:id="addressTextFieldP" layoutX="400.0" layoutY="440.0" promptText="Address" />
+                <TextField fx:id="zipTextFieldP" layoutX="400.0" layoutY="480.0" promptText="Zip Code" />
+                <TextField fx:id="gameTextField" layoutX="400.0" layoutY="520.0" promptText="Game" />
+                <TextField fx:id="teamTextField" layoutX="400.0" layoutY="560.0" promptText="Team" />
               </children>
             </AnchorPane>
           </content>
