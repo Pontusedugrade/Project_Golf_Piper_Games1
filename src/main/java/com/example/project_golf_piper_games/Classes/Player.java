@@ -33,8 +33,16 @@ public class Player {
     public Player() {
     }
 
-    public Player(int playerId, Person personId, Game gameId) {
-        this.playerId = playerId;
+     /*We learned this concept in the first course. "this" refers to the object created by this constructor. Once a player is created, he/she is added to the list of team
+     members based on the teamId*/
+    public Player(Person personId, Game gameId, Team teamId) {
+        this.personId = personId;
+        this.gameId = gameId;
+        this.teamId = teamId;
+        teamId.addTeamMembers(this);
+    }
+
+    public Player(Person personId, Game gameId) {
         this.personId = personId;
         this.gameId = gameId;
     }

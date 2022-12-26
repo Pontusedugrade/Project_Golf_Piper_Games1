@@ -93,9 +93,12 @@
                     <TableColumn fx:id="teamColumn" prefWidth="227.0" text="Team"/>
                   </columns>
                 </TableView>
-                <Button fx:id="saveNewPlayerButton" layoutX="220.0" layoutY="400.0"
-                        mnemonicParsing="false" onAction="#addPlayer"
-                        prefHeight="36.0" prefWidth="96.0" text="Add player"/>
+                <Button fx:id="saveNewSoloPlayerButton" layoutX="220.0" layoutY="400.0"
+                        mnemonicParsing="false" onAction="#addSoloPlayer"
+                        prefHeight="36.0" prefWidth="96.0" text="Add solo player"/>
+                <Button fx:id="saveNewTeamPlayerButton" layoutX="220.0" layoutY="440.0"
+                        mnemonicParsing="false" onAction="#addTeamPlayer"
+                        prefHeight="36.0" prefWidth="96.0" text="Add team player"/>
                 <TextField fx:id="firstNameTextFieldP" layoutX="01.0" layoutY="400.0" promptText="First name"/>
                 <TextField fx:id="lastNameTextFieldP" layoutX="01.0" layoutY="440.0" promptText="Last name"/>
                 <TextField fx:id="nickNameTextFieldP" layoutX="01.0" layoutY="480.0" promptText="Nick name"/>
@@ -104,8 +107,8 @@
                 <TextField fx:id="cityTextFieldP" layoutX="400.0" layoutY="400.0" promptText="City"/>
                 <TextField fx:id="addressTextFieldP" layoutX="400.0" layoutY="440.0" promptText="Address"/>
                 <TextField fx:id="zipTextFieldP" layoutX="400.0" layoutY="480.0" promptText="Zip Code"/>
-                <TextField fx:id="gameTextField" layoutX="400.0" layoutY="480.0" promptText="Game"/>
-                <TextField fx:id="teamTextField" layoutX="400.0" layoutY="480.0" promptText="Team"/>
+                <TextField fx:id="gameTextField" layoutX="400.0" layoutY="520.0" promptText="Game"/>
+                <TextField fx:id="teamTextField" layoutX="400.0" layoutY="560.0" promptText="Team"/>
               </children>
             </AnchorPane>
           </content>
