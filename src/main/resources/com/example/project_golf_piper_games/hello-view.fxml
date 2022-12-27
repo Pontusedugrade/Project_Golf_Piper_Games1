@@ -109,29 +109,48 @@
           </content>
         </Tab>
 
-        <Tab text="Team">
+        <Tab text="Game">
           <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TableView fx:id="teamTable" prefHeight="364.0" prefWidth="999.0">
+                <TableView fx:id="gameTable" prefHeight="364.0" prefWidth="999.0">
                   <columns>
-                    <TableColumn fx:id="teamIdColumn" prefWidth="39.0" text="#" />
-                    <TableColumn fx:id="teamNameColumn" prefWidth="64.0" text="Team Name" />
-                    <TableColumn fx:id="teamGameColumn" prefWidth="77.0" text="Game" />
-                    <TableColumn fx:id="teammatesColumn" prefWidth="110.0" text="Teammates" />
+                    <TableColumn fx:id="gameIdColumn" prefWidth="39.0" text="#" />
+                    <TableColumn fx:id="gameNameColumn" prefWidth="64.0" text="Name of Game" />
                   </columns>
                 </TableView>
-                <Button fx:id="createNewTeam" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addSoloPlayer" prefHeight="36.0" prefWidth="96.0" text="Create Team" />
-                <TextField fx:id="teamNameTextField" layoutX="01.0" layoutY="400.0" promptText="Team Name" />
-                <TextField fx:id="teamGameTextField" layoutX="01.0" layoutY="440.0" promptText="Game" />
-                <TextField fx:id="player1TextField" layoutX="01.0" layoutY="480.0" promptText="New Teammate" />
-                <TextField fx:id="player2TextField" layoutX="01.0" layoutY="520.0" promptText="New Teammate" />
-                <TextField fx:id="player3TextField" layoutX="01.0" layoutY="560.0" promptText="New Teammate" />
-                <TextField fx:id="player4TextField" layoutX="400.0" layoutY="400.0" promptText="New Teammate" />
-                <TextField fx:id="player5TextField" layoutX="400.0" layoutY="440.0" promptText="New Teammate" />
-                <TextField fx:id="player6TextField" layoutX="400.0" layoutY="480.0" promptText="New Teammate" />
-                <TextField fx:id="player7TextField" layoutX="400.0" layoutY="520.0" promptText="New Teammate" />
-                <TextField fx:id="player8TextField" layoutX="400.0" layoutY="560.0" promptText="New Teammate" />
+                <Button fx:id="saveNewGame" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addGame" prefHeight="36.0" prefWidth="96.0" text="Add game" />
+                <TextField fx:id="gameNameTextField" layoutX="01.0" layoutY="400.0" promptText="Game name" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+
+        <Tab text="Matchup1Vs1">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView fx:id="matchup1Vs1Table" prefHeight="364.0" prefWidth="999.0">
+                  <columns>
+                    <TableColumn fx:id="idColumnM1" prefWidth="39.0" text="#" />
+                    <TableColumn fx:id="player1ColumnM1" prefWidth="64.0" text="Player 1" />
+                    <TableColumn fx:id="player2ColumnM1" prefWidth="77.0" text="Player 2" />
+                    <TableColumn fx:id="matchupDateColumnM1" prefWidth="85.0" text="Date of match" />
+                    <TableColumn fx:id="winnerColumnM1" prefWidth="72.0" text="Winner" />
+                    <TableColumn fx:id="scorePlayer1ColumnM1" prefWidth="86.0" text="Score Player 1" />
+                    <TableColumn fx:id="scorePlayer2ColumnM1" prefWidth="71.0" text="Score Player 2" />
+                    <TableColumn fx:id="gameColumnM1" prefWidth="65.0" text="Game" />
+                  </columns>
+                </TableView>
+                <Button fx:id="saveNewMatchup1Vs1Button" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addMatchup1Vs1" prefHeight="36.0" prefWidth="96.0" text="Add match" />
+                <TextField fx:id="player1TextField" layoutX="01.0" layoutY="400.0" promptText="Player 1 id" />
+                <TextField fx:id="player2TextField" layoutX="01.0" layoutY="440.0" promptText="Player 2 id" />
+                <TextField fx:id="gameTextFieldM1" layoutX="01.0" layoutY="480.0" promptText="Game id" />
+                <TextField fx:id="player1ScoreTextField" layoutX="01.0" layoutY="520.0" promptText="Player 1 Score" />
+                <TextField fx:id="player2ScoreTextField" layoutX="01.0" layoutY="560.0" promptText="Player 2 Score" />
+                <TextField fx:id="matchup1vs1DateTextField" layoutX="400.0" layoutY="400.0" promptText="yyyy-MM-dd" />
+                <TextField fx:id="winnerM1TextField" layoutX="400.0" layoutY="440.0" promptText="Match winner id" />
+
               </children>
             </AnchorPane>
           </content>

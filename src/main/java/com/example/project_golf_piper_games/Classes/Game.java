@@ -31,6 +31,7 @@ public class Game {
 
     //GETTER AND SETTER METHODS
 
+
     public int getGameId() {
         return gameId;
     }
