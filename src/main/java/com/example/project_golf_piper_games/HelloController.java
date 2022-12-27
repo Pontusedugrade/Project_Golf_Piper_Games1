@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
-  EntityManagerFactory entityManagerFactory = HelloApplication.ENTITY_MANAGER_FACTORY;
+    EntityManagerFactory entityManagerFactory = HelloApplication.ENTITY_MANAGER_FACTORY;
 
     /*@FXML private TableView<Person> personTable;
     @FXML private TableColumn<Person, Integer> idColumn;
@@ -328,43 +328,35 @@ public class HelloController implements Initializable {
         return localDate;
     }
 
+
     //Removing employee by employeeID-input
-    public void removeEmployee(){
+    public void removeEmployee() {
         int columnId = Integer.parseInt(idColumnTextField.getText());
         deleteEmployee(columnId);
         employeeTable.getItems().setAll(getAllEmployees());
 
     }
-    return employees;
-  }
 
-  //Removing employee by employeeID-input
-  public void removeEmployee() {
-    int columnId = Integer.parseInt(idColumnTextField.getText());
-    deleteEmployee(columnId);
-    employeeTable.getItems().setAll(getAllEmployees());
-
-  }
-
-  public void deleteEmployee(int columnId) {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-    EntityTransaction transaction = null;
-    try {
-      transaction = entityManager.getTransaction();
-      transaction.begin();
-      Employee theEmployeeToRemove = entityManager.find(Employee.class, columnId);
-      entityManager.remove(theEmployeeToRemove);
-      // Call flush-method of the EntityManager to write changes to the database.
-      entityManager.flush();
-      // Commit the changes
-      transaction.commit();
-    } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
-    } finally {
-      entityManager.close();
+    public void deleteEmployee(int columnId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            Employee theEmployeeToRemove = entityManager.find(Employee.class, columnId);
+            entityManager.remove(theEmployeeToRemove);
+            // Call flush-method of the EntityManager to write changes to the database.
+            entityManager.flush();
+            // Commit the changes
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
     }
 
     /*Constructor for adding an employee. Each object instantiated is inserted into the table that contains the ID property of that object. For example,
@@ -383,43 +375,63 @@ public class HelloController implements Initializable {
         employeeTable.getItems().setAll(getAllEmployees());
 
     }
-  }
-
-  public void editEmployee() {
-    int employeeId = Integer.parseInt(idColumnTextField.getText());
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-    EntityTransaction transaction = null;
-    try {
-      transaction = entityManager.getTransaction();
-      transaction.begin();
-      Employee employeeBeingEdited = entityManager.find(Employee.class, employeeId);
-      employeeBeingEdited.getPersonId().setFirstName(firstNameTextField.getText());
-      employeeBeingEdited.getPersonId().setLastName(lastNameTextField.getText());
-      employeeBeingEdited.getPersonId().setMailAddress(eMailTextField.getText());
-      employeeBeingEdited.getPersonId().setNickName(nickNameTextField.getText());
-      employeeBeingEdited.getPersonId().getAddressId().getCityId().getCountryId().setCountryName(countryTextField.getText());
-      employeeBeingEdited.getPersonId().getAddressId().getCityId().setCity(cityTextField.getText());
-      employeeBeingEdited.getPersonId().getAddressId().setZip(Integer.parseInt(zipTextField.getText()));
-      employeeBeingEdited.getPersonId().getAddressId().setAddress(addressTextField.getText());
-      entityManager.merge(employeeBeingEdited);
-      transaction.commit();
-    } catch (Exception exception) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      exception.printStackTrace();
-    } finally {
-      entityManager.close();
-      employeeTable.getItems().setAll(getAllEmployees());
+    public void saveEmployee(Country country, PostalAddress postalAddress, Address address, Person person, Employee employee) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            entityManager.persist(country);
+            entityManager.persist(postalAddress);
+            entityManager.persist(address);
+            entityManager.persist(person);
+            entityManager.persist(employee);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
     }
-  }
 
-  // The constructor of a team player needs a team. So it has its own method and button.
-  // Attention!!!!!!!!!!!!
+    public void editEmployee() {
+        int employeeId = Integer.parseInt(idColumnTextField.getText());
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            Employee employeeBeingEdited = entityManager.find(Employee.class, employeeId);
+            employeeBeingEdited.getPersonId().setFirstName(firstNameTextField.getText());
+            employeeBeingEdited.getPersonId().setLastName(lastNameTextField.getText());
+            employeeBeingEdited.getPersonId().setMailAddress(eMailTextField.getText());
+            employeeBeingEdited.getPersonId().setNickName(nickNameTextField.getText());
+            employeeBeingEdited.getPersonId().getAddressId().getCityId().getCountryId().setCountryName(countryTextField.getText());
+            employeeBeingEdited.getPersonId().getAddressId().getCityId().setCity(cityTextField.getText());
+            employeeBeingEdited.getPersonId().getAddressId().setZip(Integer.parseInt(zipTextField.getText()));
+            employeeBeingEdited.getPersonId().getAddressId().setAddress(addressTextField.getText());
+            entityManager.merge(employeeBeingEdited);
+            transaction.commit();
+        } catch (Exception exception) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            exception.printStackTrace();
+        } finally {
+            entityManager.close();
+            employeeTable.getItems().setAll(getAllEmployees());
+        }
+    }
+
+    // The constructor of a team player needs a team. So it has its own method and button.
+    // Attention!!!!!!!!!!!!
    /*This method is currently not working. The code is correct, but it needs the teams table to be created. If you go to the Player class and check the first constructor,
    you will see that every player created is automatically added to the list of team members based on the team ID. This list exist in Team table which is not coded yet*/
 
-public void addTeamPlayer() {
+    public void addTeamPlayer() {
         Country newCountry = new Country(countryTextFieldP.getText());
         PostalAddress newPostalAddress = new PostalAddress(newCountry, cityTextFieldP.getText());
         Address newAddress = new Address(addressTextFieldP.getText(), Integer.parseInt(zipTextFieldP.getText()), newPostalAddress);
@@ -453,7 +465,7 @@ public void addTeamPlayer() {
 
         //Following code not used to try another save method.
         Matchup1Vs1 newMatchup1Vs1 = new Matchup1Vs1(LocalDate.parse(matchup1vs1DateTextField.getText()), Integer.parseInt(player1ScoreTextField.getText()),
-         Integer.parseInt(player2ScoreTextField.getText()), player1, player2, winner, game);
+                Integer.parseInt(player2ScoreTextField.getText()), player1, player2, winner, game);
 
         saveMatchup1Vs1(newMatchup1Vs1);
 
@@ -628,36 +640,40 @@ public void addTeamPlayer() {
             entityManager.close();
         }
         return employees;
-        
+
 
     }
-  }
 
 
-  // Those 2 methods below aren't functioning properly. I couldn't figure out how to solve it.
 
-  public List<Player> getAllPlayers() {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-    EntityTransaction transaction = null;
-    List<Player> players = null;
-    try {
-      transaction = entityManager.getTransaction();
-      transaction.begin();
-      TypedQuery<Player> allPlayersQuery = entityManager.createQuery("from Player ", Player.class);
-      players = allPlayersQuery.getResultList();
-      transaction.commit();
+    // Those 2 methods below aren't functioning properly. I couldn't figure out how to solve it.
 
-    } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
-    } finally {
-      entityManager.close();
+    public List<Player> getAllPlayers(){
+
+        EntityManager entityManager=entityManagerFactory.createEntityManager();
+        EntityTransaction transaction=null;
+        List<Player> players=null;
+        try{
+            transaction=entityManager.getTransaction();
+            transaction.begin();
+            TypedQuery<Player> allPlayersQuery=entityManager.createQuery("from Player ",Player.class);
+            players=allPlayersQuery.getResultList();
+            transaction.commit();
+
+        }catch(Exception e){
+            if(transaction!=null){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }finally{
+            entityManager.close();
+        }
+        return players;
     }
 
     // Method as follows created with above methods as pattern.
     public List<Matchup1Vs1> getAllMatchup1Vs1s() {
+
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         List<Matchup1Vs1> matchup1Vs1s = null;
@@ -701,6 +717,8 @@ public void addTeamPlayer() {
         }
         return games;
     }
+
+}
 
 
 
@@ -777,4 +795,3 @@ public void addTeamPlayer() {
     }*/
 
 
-}
