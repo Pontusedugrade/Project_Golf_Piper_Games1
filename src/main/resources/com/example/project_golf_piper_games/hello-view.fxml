@@ -56,7 +56,10 @@
                     <TableColumn fx:id="zipColumn" prefWidth="107.0" text="Zip Code" />
                   </columns>
                 </TableView>
-                <Button fx:id="saveNewEmployeeButton" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="36.0" prefWidth="96.0" text="Add employee" />
+                <Button fx:id="saveNewEmployeeButton" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="36.0" prefWidth="96.0" text="Add Employee" />
+                <Button fx:id="deleteEmployeeButton" layoutX="680.0" layoutY="480.0" mnemonicParsing="false" onAction="#removeEmployee" prefHeight="45.0" prefWidth="114.0" text="Remove Employee" />
+                <Button fx:id="editEmployeeButton" layoutX="680.0" layoutY="400.0" mnemonicParsing="false" onAction="#editEmployee" prefHeight="45.0" prefWidth="114.0" text="Edit Employee" />
+                <TextField fx:id="idColumnTextField" layoutX="690.0" layoutY="450.0" prefHeight="25.0" prefWidth="95.0" promptText="Employee Id" />
                 <TextField fx:id="firstNameTextField" layoutX="01.0" layoutY="400.0" promptText="First name" />
                 <TextField fx:id="lastNameTextField" layoutX="01.0" layoutY="440.0" promptText="Last name" />
                 <TextField fx:id="nickNameTextField" layoutX="01.0" layoutY="480.0" promptText="Nick name" />
@@ -65,8 +68,6 @@
                 <TextField fx:id="cityTextField" layoutX="400.0" layoutY="400.0" promptText="City" />
                 <TextField fx:id="addressTextField" layoutX="400.0" layoutY="440.0" promptText="Address" />
                 <TextField fx:id="zipTextField" layoutX="400.0" layoutY="480.0" promptText="Zip Code" />
-                        <Button fx:id="deleteEmployeeButton" layoutX="680.0" layoutY="520.0" mnemonicParsing="false" onAction="#removeEmployee" prefHeight="45.0" prefWidth="114.0" text="Remove Employee" />
-                        <TextField fx:id="idColumnTextField" layoutX="575.0" layoutY="533.0" prefHeight="25.0" prefWidth="95.0" promptText="Employee Id" />
               </children>
             </AnchorPane>
           </content>
@@ -149,6 +150,7 @@
                 <TextField fx:id="player2ScoreTextField" layoutX="01.0" layoutY="560.0" promptText="Player 2 Score" />
                 <TextField fx:id="matchup1vs1DateTextField" layoutX="400.0" layoutY="400.0" promptText="yyyy-MM-dd" />
                 <TextField fx:id="winnerM1TextField" layoutX="400.0" layoutY="440.0" promptText="Match winner id" />
+
               </children>
             </AnchorPane>
           </content>

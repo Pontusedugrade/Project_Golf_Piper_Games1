@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
-    EntityManagerFactory entityManagerFactory = HelloApplication.ENTITY_MANAGER_FACTORY;
+  EntityManagerFactory entityManagerFactory = HelloApplication.ENTITY_MANAGER_FACTORY;
 
     /*@FXML private TableView<Person> personTable;
     @FXML private TableColumn<Person, Integer> idColumn;
@@ -333,28 +333,38 @@ public class HelloController implements Initializable {
         int columnId = Integer.parseInt(idColumnTextField.getText());
         deleteEmployee(columnId);
         employeeTable.getItems().setAll(getAllEmployees());
-    }
 
-    public void deleteEmployee(int columnId) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = null;
-        try {
-            transaction = entityManager.getTransaction();
-            transaction.begin();
-            Employee theEmployeeToRemove = entityManager.find(Employee.class, columnId);
-            entityManager.remove(theEmployeeToRemove);
-            // Call flush-method of the EntityManager to write changes to the database.
-            entityManager.flush();
-            // Commit the changes
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            entityManager.close();
-        }
+    }
+    return employees;
+  }
+
+  //Removing employee by employeeID-input
+  public void removeEmployee() {
+    int columnId = Integer.parseInt(idColumnTextField.getText());
+    deleteEmployee(columnId);
+    employeeTable.getItems().setAll(getAllEmployees());
+
+  }
+
+  public void deleteEmployee(int columnId) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = null;
+    try {
+      transaction = entityManager.getTransaction();
+      transaction.begin();
+      Employee theEmployeeToRemove = entityManager.find(Employee.class, columnId);
+      entityManager.remove(theEmployeeToRemove);
+      // Call flush-method of the EntityManager to write changes to the database.
+      entityManager.flush();
+      // Commit the changes
+      transaction.commit();
+    } catch (Exception e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+    } finally {
+      entityManager.close();
     }
 
     /*Constructor for adding an employee. Each object instantiated is inserted into the table that contains the ID property of that object. For example,
@@ -371,39 +381,45 @@ public class HelloController implements Initializable {
         saveEmployee(newCountry, newPostalAddress, newAddress, newPerson, newEmployee);
 
         employeeTable.getItems().setAll(getAllEmployees());
+
     }
+  }
 
-    /*This is the same method that Marcus used. There are 2 differences. First, it persists all the properties needed to add a new employee.
-    Marcus said that it's no problem to persist several properties in one transaction.
-    Second, since this method isn't included in an if-statement like Marcus did, there is no need for it to be a boolean. So it's void and it works*/
-    public void saveEmployee(Country country, PostalAddress postalAddress, Address address, Person person, Employee employee) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = null;
-        try {
-            transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.persist(country);
-            entityManager.persist(postalAddress);
-            entityManager.persist(address);
-            entityManager.persist(person);
-            entityManager.persist(employee);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            entityManager.close();
-        }
+  public void editEmployee() {
+    int employeeId = Integer.parseInt(idColumnTextField.getText());
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = null;
+    try {
+      transaction = entityManager.getTransaction();
+      transaction.begin();
+      Employee employeeBeingEdited = entityManager.find(Employee.class, employeeId);
+      employeeBeingEdited.getPersonId().setFirstName(firstNameTextField.getText());
+      employeeBeingEdited.getPersonId().setLastName(lastNameTextField.getText());
+      employeeBeingEdited.getPersonId().setMailAddress(eMailTextField.getText());
+      employeeBeingEdited.getPersonId().setNickName(nickNameTextField.getText());
+      employeeBeingEdited.getPersonId().getAddressId().getCityId().getCountryId().setCountryName(countryTextField.getText());
+      employeeBeingEdited.getPersonId().getAddressId().getCityId().setCity(cityTextField.getText());
+      employeeBeingEdited.getPersonId().getAddressId().setZip(Integer.parseInt(zipTextField.getText()));
+      employeeBeingEdited.getPersonId().getAddressId().setAddress(addressTextField.getText());
+      entityManager.merge(employeeBeingEdited);
+      transaction.commit();
+    } catch (Exception exception) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      exception.printStackTrace();
+    } finally {
+      entityManager.close();
+      employeeTable.getItems().setAll(getAllEmployees());
     }
+  }
 
-
-    // The constructor of a team player needs a team. So it has its own method and button.
-    // Attention!!!!!!!!!!!!
+  // The constructor of a team player needs a team. So it has its own method and button.
+  // Attention!!!!!!!!!!!!
    /*This method is currently not working. The code is correct, but it needs the teams table to be created. If you go to the Player class and check the first constructor,
    you will see that every player created is automatically added to the list of team members based on the team ID. This list exist in Team table which is not coded yet*/
-    public void addTeamPlayer() {
+
+public void addTeamPlayer() {
         Country newCountry = new Country(countryTextFieldP.getText());
         PostalAddress newPostalAddress = new PostalAddress(newCountry, cityTextFieldP.getText());
         Address newAddress = new Address(addressTextFieldP.getText(), Integer.parseInt(zipTextFieldP.getText()), newPostalAddress);
@@ -612,28 +628,32 @@ public class HelloController implements Initializable {
             entityManager.close();
         }
         return employees;
+        
+
     }
+  }
 
-    public List<Player> getAllPlayers() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = null;
-        List<Player> players = null;
-        try {
-            transaction = entityManager.getTransaction();
-            transaction.begin();
-            TypedQuery<Player> allPlayersQuery = entityManager.createQuery("from Player ", Player.class);
-            players = allPlayersQuery.getResultList();
-            transaction.commit();
 
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            entityManager.close();
-        }
-        return players;
+  // Those 2 methods below aren't functioning properly. I couldn't figure out how to solve it.
+
+  public List<Player> getAllPlayers() {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = null;
+    List<Player> players = null;
+    try {
+      transaction = entityManager.getTransaction();
+      transaction.begin();
+      TypedQuery<Player> allPlayersQuery = entityManager.createQuery("from Player ", Player.class);
+      players = allPlayersQuery.getResultList();
+      transaction.commit();
+
+    } catch (Exception e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+    } finally {
+      entityManager.close();
     }
 
     // Method as follows created with above methods as pattern.
@@ -681,6 +701,7 @@ public class HelloController implements Initializable {
         }
         return games;
     }
+
 
 
 
