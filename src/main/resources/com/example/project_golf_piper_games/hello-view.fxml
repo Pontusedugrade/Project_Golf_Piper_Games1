@@ -56,7 +56,10 @@
                     <TableColumn fx:id="zipColumn" prefWidth="107.0" text="Zip Code" />
                   </columns>
                 </TableView>
-                <Button fx:id="saveNewEmployeeButton" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="36.0" prefWidth="96.0" text="Add employee" />
+                <Button fx:id="saveNewEmployeeButton" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addEmployee" prefHeight="36.0" prefWidth="96.0" text="Add Employee" />
+                <Button fx:id="deleteEmployeeButton" layoutX="680.0" layoutY="480.0" mnemonicParsing="false" onAction="#removeEmployee" prefHeight="45.0" prefWidth="114.0" text="Remove Employee" />
+                <Button fx:id="editEmployeeButton" layoutX="680.0" layoutY="400.0" mnemonicParsing="false" onAction="#editEmployee" prefHeight="45.0" prefWidth="114.0" text="Edit Employee" />
+                <TextField fx:id="idColumnTextField" layoutX="690.0" layoutY="450.0" prefHeight="25.0" prefWidth="95.0" promptText="Employee Id" />
                 <TextField fx:id="firstNameTextField" layoutX="01.0" layoutY="400.0" promptText="First name" />
                 <TextField fx:id="lastNameTextField" layoutX="01.0" layoutY="440.0" promptText="Last name" />
                 <TextField fx:id="nickNameTextField" layoutX="01.0" layoutY="480.0" promptText="Nick name" />
@@ -65,8 +68,6 @@
                 <TextField fx:id="cityTextField" layoutX="400.0" layoutY="400.0" promptText="City" />
                 <TextField fx:id="addressTextField" layoutX="400.0" layoutY="440.0" promptText="Address" />
                 <TextField fx:id="zipTextField" layoutX="400.0" layoutY="480.0" promptText="Zip Code" />
-                        <Button fx:id="deleteEmployeeButton" layoutX="680.0" layoutY="520.0" mnemonicParsing="false" onAction="#removeEmployee" prefHeight="45.0" prefWidth="114.0" text="Remove Employee" />
-                        <TextField fx:id="idColumnTextField" layoutX="575.0" layoutY="533.0" prefHeight="25.0" prefWidth="95.0" promptText="Employee Id" />
               </children>
             </AnchorPane>
           </content>
@@ -103,6 +104,34 @@
                 <TextField fx:id="zipTextFieldP" layoutX="400.0" layoutY="480.0" promptText="Zip Code" />
                 <TextField fx:id="gameTextField" layoutX="400.0" layoutY="520.0" promptText="Game" />
                 <TextField fx:id="teamTextField" layoutX="400.0" layoutY="560.0" promptText="Team" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+
+        <Tab text="Team">
+          <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <TableView fx:id="teamTable" prefHeight="364.0" prefWidth="999.0">
+                  <columns>
+                    <TableColumn fx:id="teamIdColumn" prefWidth="39.0" text="#" />
+                    <TableColumn fx:id="teamNameColumn" prefWidth="64.0" text="Team Name" />
+                    <TableColumn fx:id="teamGameColumn" prefWidth="77.0" text="Game" />
+                    <TableColumn fx:id="teammatesColumn" prefWidth="110.0" text="Teammates" />
+                  </columns>
+                </TableView>
+                <Button fx:id="createNewTeam" layoutX="220.0" layoutY="400.0" mnemonicParsing="false" onAction="#addSoloPlayer" prefHeight="36.0" prefWidth="96.0" text="Create Team" />
+                <TextField fx:id="teamNameTextField" layoutX="01.0" layoutY="400.0" promptText="Team Name" />
+                <TextField fx:id="teamGameTextField" layoutX="01.0" layoutY="440.0" promptText="Game" />
+                <TextField fx:id="player1TextField" layoutX="01.0" layoutY="480.0" promptText="New Teammate" />
+                <TextField fx:id="player2TextField" layoutX="01.0" layoutY="520.0" promptText="New Teammate" />
+                <TextField fx:id="player3TextField" layoutX="01.0" layoutY="560.0" promptText="New Teammate" />
+                <TextField fx:id="player4TextField" layoutX="400.0" layoutY="400.0" promptText="New Teammate" />
+                <TextField fx:id="player5TextField" layoutX="400.0" layoutY="440.0" promptText="New Teammate" />
+                <TextField fx:id="player6TextField" layoutX="400.0" layoutY="480.0" promptText="New Teammate" />
+                <TextField fx:id="player7TextField" layoutX="400.0" layoutY="520.0" promptText="New Teammate" />
+                <TextField fx:id="player8TextField" layoutX="400.0" layoutY="560.0" promptText="New Teammate" />
               </children>
             </AnchorPane>
           </content>

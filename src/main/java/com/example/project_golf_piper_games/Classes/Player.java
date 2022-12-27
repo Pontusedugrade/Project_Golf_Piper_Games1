@@ -39,7 +39,10 @@ public class Player {
         this.personId = personId;
         this.gameId = gameId;
         this.teamId = teamId;
-        teamId.addTeamMembers(this);
+        if (this.teamId.getTeamName() == null)
+            this.teamId.setTeamName("-");
+        else
+            teamId.addTeammates(this);
     }
 
     public Player(Person personId, Game gameId) {
@@ -112,6 +115,8 @@ public class Player {
     }
 
     public String getPlayerTeamName(){
+        if (this.teamId.getTeamName() == null)
+            this.teamId.setTeamName("-");
         return this.teamId.getTeamName();
     }
 
