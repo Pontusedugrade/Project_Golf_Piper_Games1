@@ -10,7 +10,7 @@ public class Matchup1Vs1 {
 
     //Properties
     @Column(name = "match_date")
-    private LocalDateTime dateTime;
+    private LocalDate localDate;
     // Check the comments at the end of this class for a summary about inputting and printing LocalDateTime values.
 
     @Id
@@ -45,8 +45,8 @@ public class Matchup1Vs1 {
     public Matchup1Vs1() {
     }
 
-    public Matchup1Vs1(LocalDateTime dateTime, int player1Score, int player2Score, Player player1Id, Player player2Id, Player winnerId, Game gameId) {
-        this.dateTime = dateTime;
+    public Matchup1Vs1(LocalDate localDate, int player1Score, int player2Score, Player player1Id, Player player2Id, Player winnerId, Game gameId) {
+        this.localDate = localDate;
         this.player1Score = player1Score;
         this.player2Score = player2Score;
         this.player1Id = player1Id;
@@ -56,16 +56,23 @@ public class Matchup1Vs1 {
     }
 
     // Getters & Setters
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
     public int getMatchup1vs1Id() {
         return matchup1vs1Id;
+    }
+
+    public String getPlayer1Nick(){
+        return this.player1Id.getPlayerNickName();
+    }
+    public String getPlayer2Nick(){
+        return this.player2Id.getPlayerNickName();
     }
 
     public void setMatchup1vs1Id(int matchup1vs1Id) {
@@ -108,10 +115,17 @@ public class Matchup1Vs1 {
         return winnerId;
     }
 
+    public String getWinnerNick(){
+        return this.winnerId.getPlayerNickName();
+    }
+
     public void setWinnerId(Player winnerId) {
         this.winnerId = winnerId;
     }
 
+    public String getGameName(){
+        return this.gameId.getGameName();
+    }
     public Game getGameId() {
         return gameId;
     }

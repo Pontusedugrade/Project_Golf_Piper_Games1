@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.persistence.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -158,7 +159,7 @@ public class HelloController implements Initializable {
     @FXML
     private TableColumn<Matchup1Vs1, String> player2ColumnM1;
     @FXML
-    private TableColumn<Matchup1Vs1, LocalDateTime> matchupDateColumnM1;
+    private TableColumn<Matchup1Vs1, LocalDate> matchupDateColumnM1; // Not sure if this datatype should be LocalDateTime or String.
     @FXML
     private TableColumn<Matchup1Vs1, String> winnerColumnM1;
     @FXML
@@ -247,14 +248,14 @@ public class HelloController implements Initializable {
         teamColumn.setCellValueFactory(new PropertyValueFactory<Player, String>("playerTeamName"));
 
         //Matchup1Vs1 columns.
-        idColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, Integer>("matchup1Vs1Id"));
-        player1ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("player1"));
-        player2ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("player2"));
-        matchupDateColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, LocalDateTime>("matchupDate"));
-        winnerColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("winner"));
+        idColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, Integer>("matchup1vs1Id"));
+        player1ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("player1Nick"));
+        player2ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("player2Nick"));
+        matchupDateColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, LocalDate>("localDate"));
+        winnerColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("winnerNick"));
         scorePlayer1ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, Integer>("player1Score"));
         scorePlayer2ColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, Integer>("player2Score"));
-        gameColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("game"));
+        gameColumnM1.setCellValueFactory(new PropertyValueFactory<Matchup1Vs1, String>("gameName"));
 
         //Game columns
         gameIdColumn.setCellValueFactory(new PropertyValueFactory<Game, Integer>("gameId"));
@@ -294,7 +295,7 @@ public class HelloController implements Initializable {
             teamTextField.setText(playerTable.getSelectionModel().getSelectedItem().getTeamId().getTeamName());
         });
 
-        //Matchup1Vs1 text fields.
+        //Matchup1Vs1 text fields. (I do not know when these lines of code are active or what it does)
         matchup1Vs1Table.getSelectionModel().selectedItemProperty().addListener((observableValue, matchup1Vs1, t1) -> {
             player1TextField.setText(matchup1Vs1Table.getSelectionModel().getSelectedItem().getPlayer1Id().getPlayerNickName());
             player2TextField.setText(matchup1Vs1Table.getSelectionModel().getSelectedItem().getPlayer2Id().getPlayerNickName());
@@ -302,12 +303,11 @@ public class HelloController implements Initializable {
             player1ScoreTextField.setText(String.valueOf(matchup1Vs1Table.getSelectionModel().getSelectedItem().getPlayer1Score()));
             player2ScoreTextField.setText(String.valueOf(matchup1Vs1Table.getSelectionModel().getSelectedItem().getPlayer2Score()));
             // Here I created and used a formatter method to turn LocalDateTime to String.
-            matchup1vs1DateTextField.setText(localDateTimeToString(matchup1Vs1Table.getSelectionModel().getSelectedItem().getDateTime()));
+            matchup1vs1DateTextField.setText(localDateToString(matchup1Vs1Table.getSelectionModel().getSelectedItem().getLocalDate()));
             winnerM1TextField.setText(matchup1Vs1Table.getSelectionModel().getSelectedItem().getWinnerId().getPlayerNickName());
         });
 
         //Game text fields.
-
         gameTable.getSelectionModel().selectedItemProperty().addListener((observableValue, game, t1) -> {
             gameNameTextField.setText(gameTable.getSelectionModel().getSelectedItem().getGameName());
         });
@@ -315,12 +315,18 @@ public class HelloController implements Initializable {
 
 
     //Date to string formatter method.
-    public String localDateTimeToString(LocalDateTime theLocalDateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm");
-        String dateAsString = theLocalDateTime.format(formatter);
+    public String localDateToString(LocalDate theLocalDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateAsString = theLocalDate.format(formatter);
         return dateAsString;
     }
 
+    //String to date formatter method.
+    public LocalDate stringToLocalDate(String theLocalDateString) {
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(theLocalDateString, customFormatter);
+        return localDate;
+    }
 
     //Removing employee by employeeID-input
     public void removeEmployee(){
@@ -359,8 +365,11 @@ public class HelloController implements Initializable {
         PostalAddress newPostalAddress = new PostalAddress(newCountry, cityTextField.getText());
         Address newAddress = new Address(addressTextField.getText(), Integer.parseInt(zipTextField.getText()), newPostalAddress);
         Person newPerson = new Person(firstNameTextField.getText(), lastNameTextField.getText(), nickNameTextField.getText(), eMailTextField.getText(), newAddress);
+
         Employee newEmployee = new Employee(newPerson);
+
         saveEmployee(newCountry, newPostalAddress, newAddress, newPerson, newEmployee);
+
         employeeTable.getItems().setAll(getAllEmployees());
     }
 
@@ -418,18 +427,22 @@ public class HelloController implements Initializable {
 
     public void addMatchup1Vs1() {
 
-        //Create two players and get their object that is already created from the player id in the database.
+        //Create two players and get their object that is already created from the player id in the database by using getPlayer method.
         Player player1 = getPlayer(Integer.parseInt(player1TextField.getText()));
         Player player2 = getPlayer(Integer.parseInt(player2TextField.getText()));
-        Player winner = getPlayer(Integer.parseInt(player2TextField.getText()));
+        Player winner = getPlayer(Integer.parseInt(winnerM1TextField.getText()));
 
-        //Game from the database. Search by the id written in the "Game id" box in the program.
-        Game game = getGame(Integer.parseInt(gameTextField.getText()));
+        //Game from the database. Search by the id written in the "Game id" box in the program through getGame method.
+        Game game = getGame(Integer.parseInt(gameTextFieldM1.getText()));
 
-        Matchup1Vs1 newMatchup1Vs1 = new Matchup1Vs1(LocalDateTime.parse(matchup1vs1DateTextField.getText()), Integer.parseInt(player1ScoreTextField.getText()),
-                Integer.parseInt(player2ScoreTextField.getText()), player1, player2, winner, game);
+        //Following code not used to try another save method.
+        Matchup1Vs1 newMatchup1Vs1 = new Matchup1Vs1(LocalDate.parse(matchup1vs1DateTextField.getText()), Integer.parseInt(player1ScoreTextField.getText()),
+         Integer.parseInt(player2ScoreTextField.getText()), player1, player2, winner, game);
 
         saveMatchup1Vs1(newMatchup1Vs1);
+
+        matchup1Vs1Table.getItems().setAll(getAllMatchup1Vs1s());
+
     }
 
     public void addGame(){
@@ -555,6 +568,7 @@ public class HelloController implements Initializable {
             entityManager.close();
         }
     }
+
 
     public void saveGame(Game theGame){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
