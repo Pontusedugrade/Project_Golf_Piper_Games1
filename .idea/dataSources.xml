@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="piper_games_db1@localhost" uuid="4bb8f52e-325e-4f06-af32-5d020c0cb758">
+    <data-source source="LOCAL" name="Pied Piper Database" uuid="4bb8f52e-325e-4f06-af32-5d020c0cb758">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/piper_games_db1</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/piper_games_db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

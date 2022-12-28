@@ -3,6 +3,7 @@ package com.example.project_golf_piper_games.Classes;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "team")
@@ -48,10 +49,11 @@ public class Team {
     teammates.add(player6);
     teammates.add(player7);
     teammates.add(player8);
-    for (Player teammate : teammates) {
+    teammates.removeIf(Objects::isNull);
+    /*for (Player teammate : teammates)
       if (teammate == null)
-        teammates.remove(teammate);
-    }
+        teammates.remove(teammate);*/
+
   }
 
   // Getters & Setters
@@ -79,8 +81,18 @@ public class Team {
     this.gameId = gameId;
   }
 
-  public List<Player> getTeammates() {
+  public List<Player> originalTeammatesGetter() {
     return teammates;
+  }
+
+  public List<String> getTeammates() {
+    List <String> teammates_nickNames = new ArrayList<>();
+    for (Player player : teammates) {
+      if (player.getPlayerNickName() != null) {
+        teammates_nickNames.add(player.getPlayerNickName());
+      }
+    }
+    return teammates_nickNames;
   }
 
   public void addTeammates(Player player) {

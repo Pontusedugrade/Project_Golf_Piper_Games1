@@ -8,120 +8,119 @@ import java.util.List;
 
 public class Player {
 
-    //Properties
+  //Properties
 
-    //Primary KEY:
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "player_id")
-    private int playerId;
+  //Primary KEY:
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "player_id")
+  private int playerId;
 
-    // FKs:
-    @OneToOne
-    @JoinColumn(name = "person_id")
-    private Person personId;
+  // FKs:
+  @OneToOne
+  @JoinColumn(name = "person_id")
+  private Person personId;
 
-    @ManyToOne
-    @JoinColumn(name = "game_id")
-    private Game gameId;
+  @ManyToOne
+  @JoinColumn(name = "game_id")
+  private Game gameId;
 
-    @OneToOne
-    @JoinColumn(name = "team_id")
-    private Team teamId;
+  @OneToOne
+  @JoinColumn(name = "team_id")
+  private Team teamId;
 
-    //Constructor
-    public Player() {
-    }
+  //Constructor
+  public Player() {
+  }
 
-     /*We learned this concept in the first course. "this" refers to the object created by this constructor. Once a player is created, he/she is added to the list of team
-     members based on the teamId*/
-    public Player(Person personId, Game gameId, Team teamId) {
-        this.personId = personId;
-        this.gameId = gameId;
-        this.teamId = teamId;
-        if (this.teamId.getTeamName() == null)
-            this.teamId.setTeamName("-");
-        else
-            teamId.addTeammates(this);
-    }
+  /*We learned this concept in the first course. "this" refers to the object created by this constructor. Once a player is created, he/she is added to the list of team
+  members based on the teamId*/
+  public Player(Person personId, Game gameId, Team teamId) {
+    this.personId = personId;
+    this.gameId = gameId;
+    this.teamId = teamId;
+    if (this.teamId != null)
+      teamId.addTeammates(this);
+  }
 
-    public Player(Person personId, Game gameId) {
-        this.personId = personId;
-        this.gameId = gameId;
-    }
+  public Player(Person personId, Game gameId) {
+    this.personId = personId;
+    this.gameId = gameId;
+  }
 
-    public int getPlayerId() {
-        return playerId;
-    }
+  public int getPlayerId() {
+    return playerId;
+  }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
+  public void setPlayerId(int playerId) {
+    this.playerId = playerId;
+  }
 
-    public Person getPersonId() {
-        return personId;
-    }
+  public Person getPersonId() {
+    return personId;
+  }
 
-    public void setPersonId(Person personId) {
-        this.personId = personId;
-    }
+  public void setPersonId(Person personId) {
+    this.personId = personId;
+  }
 
-    public Game getGameId() {
-        return gameId;
-    }
+  public Game getGameId() {
+    return gameId;
+  }
 
-    public void setGameId(Game gameId) {
-        this.gameId = gameId;
-    }
+  public void setGameId(Game gameId) {
+    this.gameId = gameId;
+  }
 
-    public Team getTeamId() {
-        return teamId;
-    }
+  public Team getTeamId() {
+    return teamId;
+  }
 
-    public void setTeamId(Team teamId) {
-        this.teamId = teamId;
-    }
+  public void setTeamId(Team teamId) {
+    this.teamId = teamId;
+  }
 
-    public String getPlayerFirstName() {
-        return this.personId.getFirstName();
-    }
+  public String getPlayerFirstName() {
+    return this.personId.getFirstName();
+  }
 
-    public String getPlayerLastName(){
-        return this.personId.getLastName();
-    }
+  public String getPlayerLastName() {
+    return this.personId.getLastName();
+  }
 
-    public String getPlayerNickName(){
-        return this.personId.getNickName();
-    }
+  public String getPlayerNickName() {
+    return this.personId.getNickName();
+  }
 
-    public String getPlayerMailAddress(){
-        return this.personId.getMailAddress();
-    }
+  public String getPlayerMailAddress() {
+    return this.personId.getMailAddress();
+  }
 
-    public String getPlayerAddress(){
-        return this.personId.getAddressId().getAddress();
-    }
+  public String getPlayerAddress() {
+    return this.personId.getAddressId().getAddress();
+  }
 
-    public int getPlayerZip(){
-        return this.personId.getAddressId().getZip();
-    }
+  public int getPlayerZip() {
+    return this.personId.getAddressId().getZip();
+  }
 
-    public String getPlayerCity(){
-        return this.personId.getAddressId().getCityId().getCity();
-    }
+  public String getPlayerCity() {
+    return this.personId.getAddressId().getCityId().getCity();
+  }
 
-    public String getPlayerCountry(){
-        return this.personId.getAddressId().getCityId().getCountryId().getCountryName();
-    }
+  public String getPlayerCountry() {
+    return this.personId.getAddressId().getCityId().getCountryId().getCountryName();
+  }
 
-    public String getPlayerTeamName(){
-        if (this.teamId.getTeamName() == null)
-            this.teamId.setTeamName("-");
-        return this.teamId.getTeamName();
-    }
+  public String getPlayerTeamName() {
+    if (this.teamId == null)
+      return ("             -");
+    else
+      return this.teamId.getTeamName();
+  }
 
-    public String getPlayerGameName(){
-        return this.gameId.getGameName();
-    }
+  public String getPlayerGameName() {
+    return this.gameId.getGameName();
+  }
 }
 
