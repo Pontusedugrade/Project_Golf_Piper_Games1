@@ -126,6 +126,7 @@ public class Matchup1Vs1 {
     public String getGameName(){
         return this.gameId.getGameName();
     }
+
     public Game getGameId() {
         return gameId;
     }
