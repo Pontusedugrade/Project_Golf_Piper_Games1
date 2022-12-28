@@ -41,7 +41,7 @@ public class Game {
     }
 
     public String getGameName() {
-        return gameName;
+        return this.gameName;
     }
 
     public void setGameName(String gameName) {

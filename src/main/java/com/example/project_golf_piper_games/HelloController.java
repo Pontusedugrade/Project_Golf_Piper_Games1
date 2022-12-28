@@ -303,7 +303,7 @@ private TableView <Team> teamTable;
       cityTextFieldP.setText(playerTable.getSelectionModel().getSelectedItem().getPersonId().getAddressId().getCityId().getCity());
       addressTextFieldP.setText(playerTable.getSelectionModel().getSelectedItem().getPersonId().getAddressId().getAddress());
       zipTextFieldP.setText(String.valueOf(playerTable.getSelectionModel().getSelectedItem().getPersonId().getAddressId().getZip()));
-      gameTextField.setText(playerTable.getSelectionModel().getSelectedItem().getGameId().getGameName());
+      gameTextField.setText(String.valueOf(playerTable.getSelectionModel().getSelectedItem().getGameId().getGameId()));
       teamTextField.setText(playerTable.getSelectionModel().getSelectedItem().getTeamId().getTeamName());
     });
   //________________________________________________________________________________________________________
@@ -514,9 +514,13 @@ private TableView <Team> teamTable;
     PostalAddress newPostalAddress = new PostalAddress(newCountry, cityTextFieldP.getText());
     Address newAddress = new Address(addressTextFieldP.getText(), Integer.parseInt(zipTextFieldP.getText()), newPostalAddress);
     Person newPerson = new Person(firstNameTextFieldP.getText(), lastNameTextFieldP.getText(), nickNameTextFieldP.getText(), eMailTextFieldP.getText(), newAddress);
-    Game newGame = new Game(gameTextField.getText());
-    Player newPlayer = new Player(newPerson, newGame);
-    saveSoloPlayer(newCountry, newPostalAddress, newAddress, newPerson, newGame, newPlayer);
+
+    Game game = getGame(Integer.parseInt(gameTextField.getText()));
+
+    Player newPlayer = new Player(newPerson, game);
+
+    saveSoloPlayer(newCountry, newPostalAddress, newAddress, newPerson, newPlayer);
+
     playerTable.getItems().setAll(getAllPlayers());
   }
 
@@ -558,6 +562,31 @@ private TableView <Team> teamTable;
       entityManager.persist(person);
       entityManager.persist(game);
       entityManager.persist(player);
+      transaction.commit();
+    } catch (Exception e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+    } finally {
+      entityManager.close();
+    }
+  }
+ public void saveSoloPlayer(Country country, PostalAddress postalAddress, Address address, Person person, Player player) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = null;
+
+    try {
+      transaction = entityManager.getTransaction();
+      transaction.begin();
+
+      entityManager.persist(country);
+      entityManager.persist(postalAddress);
+      entityManager.persist(address);
+      entityManager.persist(person);
+      // Game is not persisted!!! If it is it will create a new game, which we do not want.
+      entityManager.persist(player);
+
       transaction.commit();
     } catch (Exception e) {
       if (transaction != null) {
@@ -711,7 +740,7 @@ private TableView <Team> teamTable;
   // (Game Table)
 
   public void addGame() {
-    Game newGame = new Game(gameNameColumn.getText());
+    Game newGame = new Game(gameNameTextField.getText());
     saveGame(newGame);
   }
 
