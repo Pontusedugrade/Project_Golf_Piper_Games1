@@ -25,6 +25,7 @@
                     <TableColumn fx:id="lastNameColumn" prefWidth="86.0" text="Last name"/>
                     <TableColumn fx:id="nickNameColumn" prefWidth="83.0" text="Nick name"/>
                     <TableColumn fx:id="eMailColumn" prefWidth="133.0" text="E-mail"/>
+                    <TableColumn fx:id="countryIdColumn" prefWidth="133.0" text="Country ID"/>
                     <TableColumn fx:id="countryColumn" prefWidth="86.0" text="Country"/>
                     <TableColumn fx:id="cityColumn" prefWidth="96.0" text="City"/>
                     <TableColumn fx:id="addressColumn" prefWidth="111.0" text="Address"/>

@@ -86,5 +86,9 @@ public class Employee {
     public String getEmployeeCountry(){
         return this.personId.getAddressId().getCityId().getCountryId().getCountryName();
     }
+
+    public int getCountryId() {
+        return this.personId.getAddressId().getCityId().getCountryId().getCountryId();
+    }
 }
 

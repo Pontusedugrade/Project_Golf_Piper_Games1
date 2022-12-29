@@ -9,9 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javax.persistence.*;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,6 +36,9 @@ public class HelloController implements Initializable {
   private TableColumn<Employee, String> nickNameColumn;
   @FXML
   private TableColumn<Employee, String> eMailColumn;
+
+  @FXML
+  private TableColumn<Employee, Integer> countryIdColumn;
   @FXML
   private TableColumn<Employee, String> countryColumn;
   @FXML
@@ -257,6 +258,7 @@ private TableView <Team> teamTable;
     lastNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeLastName"));
     nickNameColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeNickName"));
     eMailColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeMailAddress"));
+    countryIdColumn.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("countryId"));
     countryColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeCountry"));
     cityColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeCity"));
     addressColumn.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeAddress"));
@@ -401,26 +403,56 @@ private TableView <Team> teamTable;
   we instantiate country, and we include it in the Postal Address constructor to get the country ID. We instantiate postal address, and we include it in the address
    constructor to get the postal address ID. And so on*/
   public void addEmployee() {
-    Country newCountry = new Country(countryTextField.getText());
-    PostalAddress newPostalAddress = new PostalAddress(newCountry, cityTextField.getText());
+    Country newOrExistingCountry;
+    int PCID = possibleCountryId(countryTextField.getText());
+    if (PCID != 0) {
+      int countryIndexInList = possibleCountryId(countryTextField.getText()) - 1;
+      newOrExistingCountry = getAllCountries().get(countryIndexInList);
+    }
+    else
+      newOrExistingCountry = new Country(countryTextField.getText());
+
+    PostalAddress newPostalAddress = new PostalAddress(newOrExistingCountry, cityTextField.getText());
     Address newAddress = new Address(addressTextField.getText(), Integer.parseInt(zipTextField.getText()), newPostalAddress);
     Person newPerson = new Person(firstNameTextField.getText(), lastNameTextField.getText(), nickNameTextField.getText(), eMailTextField.getText(), newAddress);
 
     Employee newEmployee = new Employee(newPerson);
-
-    saveEmployee(newCountry, newPostalAddress, newAddress, newPerson, newEmployee);
-
+    if (PCID == 0)
+      saveEmployee_C(newOrExistingCountry, newPostalAddress, newAddress, newPerson, newEmployee);
+    else
+      saveEmployee(newPostalAddress, newAddress, newPerson, newEmployee);
     employeeTable.getItems().setAll(getAllEmployees());
 
   }
 
-  public void saveEmployee(Country country, PostalAddress postalAddress, Address address, Person person, Employee employee) {
+  public void saveEmployee_C(Country country, PostalAddress postalAddress, Address address, Person person, Employee employee) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     EntityTransaction transaction = null;
     try {
       transaction = entityManager.getTransaction();
       transaction.begin();
       entityManager.persist(country);
+      entityManager.persist(postalAddress);
+      entityManager.persist(address);
+      entityManager.persist(person);
+      entityManager.persist(employee);
+      transaction.commit();
+    } catch (Exception e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+    } finally {
+      entityManager.close();
+    }
+  }
+
+  public void saveEmployee(PostalAddress postalAddress, Address address, Person person, Employee employee) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = null;
+    try {
+      transaction = entityManager.getTransaction();
+      transaction.begin();
       entityManager.persist(postalAddress);
       entityManager.persist(address);
       entityManager.persist(person);
@@ -493,6 +525,51 @@ private TableView <Team> teamTable;
     } finally {
       entityManager.close();
     }
+  }
+
+  public int possibleCountryId (String countryName) {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = null;
+    int CBSID = 0;
+    try {
+      transaction = entityManager.getTransaction();
+      transaction.begin();
+      for (Country country : getAllCountries())
+        if (country.getCountryName().equals(countryName))
+          CBSID = country.getCountryId();
+      transaction.commit();
+    }
+    catch (Exception e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+    } finally {
+      entityManager.close();
+    }
+    return CBSID;
+  }
+
+  public List<Country> getAllCountries() {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityTransaction transaction = null;
+    List<Country> countries = null;
+    try {
+      transaction = entityManager.getTransaction();
+      transaction.begin();
+      TypedQuery<Country> allCountriesQuery = entityManager.createQuery("from Country ", Country.class);
+      countries = allCountriesQuery.getResultList();
+      transaction.commit();
+
+    } catch (Exception e) {
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
+    } finally {
+      entityManager.close();
+    }
+    return countries;
   }
   // _________________________________________________________________________________________________________________________________
   // (Player Table)
@@ -634,6 +711,8 @@ private TableView <Team> teamTable;
     Player player8 = findPlayerViaNickname(teammate8_TextField.getText());
     Game newGame = new Game(teamGameTextField.getText());
     Team newTeam = new Team(teamNameTextField.getText(), newGame, player1, player2, player3, player4, player5, player6, player7, player8);
+    for (String nickName : newTeam.getTeammates())
+      System.out.println(nickName);
     saveTeam(newTeam, newGame);
     //saveTeam(newTeam, newGame);
     teamTable.getItems().setAll(getAllTeams());
@@ -743,6 +822,8 @@ private TableView <Team> teamTable;
   public void addGame() {
     Game newGame = new Game(gameNameTextField.getText());
     saveGame(newGame);
+    gameTable.getItems().setAll(getAllGames());
+
   }
 
   public void saveGame(Game theGame) {
