@@ -24,9 +24,17 @@ public class Team {
   @JoinColumn(name = "game_id")
   private Game gameId;
 
-  @OneToMany
+  /*@OneToMany
   @Column(name = "playerId")
-  private List<Player> teammates = new ArrayList<>();
+  private List<Player> teammates = new ArrayList<>();*/
+
+  @OneToMany
+  @JoinTable(name = "team_player",
+          joinColumns = {@JoinColumn(name = "team__id", referencedColumnName = "team_id")},
+          inverseJoinColumns = {@JoinColumn(name = "player__id", referencedColumnName = "player_id")}
+  )
+  private List <Player> teammates = new ArrayList<>();
+
 
 
   // Constructor
@@ -53,7 +61,6 @@ public class Team {
     /*for (Player teammate : teammates)
       if (teammate == null)
         teammates.remove(teammate);*/
-
   }
 
   // Getters & Setters
@@ -85,9 +92,9 @@ public class Team {
     return teammates;
   }
 
-  public List<String> getTeammates() {
+  public List <String> getTeammates() {
     List <String> teammates_nickNames = new ArrayList<>();
-    for (Player player : teammates) {
+    for (Player player :  teammates) {
       if (player.getPlayerNickName() != null) {
         teammates_nickNames.add(player.getPlayerNickName());
       }

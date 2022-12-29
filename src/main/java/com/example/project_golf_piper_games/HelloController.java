@@ -11,6 +11,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -633,8 +634,8 @@ private TableView <Team> teamTable;
     Player player8 = findPlayerViaNickname(teammate8_TextField.getText());
     Game newGame = new Game(teamGameTextField.getText());
     Team newTeam = new Team(teamNameTextField.getText(), newGame, player1, player2, player3, player4, player5, player6, player7, player8);
-    //saveTeam(newTeam, newGame, player1, player2, player3, player4, player5, player6, player7, player8);
     saveTeam(newTeam, newGame);
+    //saveTeam(newTeam, newGame);
     teamTable.getItems().setAll(getAllTeams());
   }
 

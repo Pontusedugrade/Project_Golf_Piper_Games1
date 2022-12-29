@@ -20,9 +20,9 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/piper_games_db1?serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/piper_games_db?serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="Volvo240"/>
+            <property name="javax.persistence.jdbc.password" value="******"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

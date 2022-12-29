@@ -56,8 +56,8 @@ CREATE TABLE team(
 team_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 team_name VARCHAR(50),
 game_id INT,
-FOREIGN KEY (game_id) REFERENCES game (game_id),
-player_id INT
+FOREIGN KEY (game_id) REFERENCES game (game_id)
+#player_id INT
 );
 
 /* --Player-- */
@@ -66,13 +66,20 @@ player_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 person_id INT,
 FOREIGN KEY (person_id) REFERENCES person (person_id),
 game_id INT,
-FOREIGN KEY (game_id) REFERENCES game (game_id),
-team_id INT,
-FOREIGN KEY (team_id) REFERENCES team (team_id)
+FOREIGN KEY (game_id) REFERENCES game (game_id)
+#team_id INT,
+#FOREIGN KEY (team_id) REFERENCES team (team_id)
 );
 
 /* --Lägger till foreign key (player_id) i Team-- */
-ALTER TABLE team ADD FOREIGN KEY (player_id) REFERENCES player (player_id);
+#ALTER TABLE team ADD FOREIGN KEY (player_id) REFERENCES player (player_id);
+
+CREATE TABLE team_player (
+team__id INT,
+FOREIGN KEY (team__id) REFERENCES team (team_id),
+player__id INT,
+FOREIGN KEY (player__id) REFERENCES player (player_id)
+);
 
 /* --Matchup 1 vs 1-- */
 CREATE TABLE matchup_1vs1 (

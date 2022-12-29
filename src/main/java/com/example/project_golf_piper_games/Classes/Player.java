@@ -25,8 +25,20 @@ public class Player {
   @JoinColumn(name = "game_id")
   private Game gameId;
 
-  @OneToOne
+  /*@ManyToOne
   @JoinColumn(name = "team_id")
+  private Team teamId;*/
+
+
+
+
+  @ManyToOne
+  @JoinTable(name = "team_player",
+          joinColumns = {@JoinColumn(name = "player__id", insertable = false,
+                  updatable = false, referencedColumnName = "player_id")},
+          inverseJoinColumns = {@JoinColumn(name = "team__id", insertable = false,
+                  updatable = false, referencedColumnName = "team_id")}
+  )
   private Team teamId;
 
   //Constructor
