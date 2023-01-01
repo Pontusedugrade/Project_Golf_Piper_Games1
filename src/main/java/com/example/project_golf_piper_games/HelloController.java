@@ -737,34 +737,6 @@ private TableView <Team> teamTable;
     }
   }
 
-  /*public void saveTeam(Team team, Game game, Player player1, Player player2, Player player3,
-                       Player player4, Player player5, Player player6, Player player7, Player player8) {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-    EntityTransaction transaction = null;
-    try {
-      transaction = entityManager.getTransaction();
-      transaction.begin();
-      entityManager.persist(team);
-      entityManager.persist(game);
-      //entityManager.persist(team.originalTeammatesGetter());
-      entityManager.persist(player1);
-      entityManager.persist(player2);
-      entityManager.persist(player3);
-      entityManager.persist(player4);
-      entityManager.persist(player5);
-      entityManager.persist(player6);
-      entityManager.persist(player7);
-      entityManager.persist(player8);
-      transaction.commit();
-    } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
-    } finally {
-      entityManager.close();
-    }
-  }*/
 
   public Player findPlayerViaNickname(String nickName) {
     if (nickName != null) {
@@ -993,83 +965,4 @@ private TableView <Team> teamTable;
     }
     return matchup1Vs1s;
   }
-//_________________________________________________________________________________________________________________________________
-
-
 }
-
-
-
-
-
-
-
-    /*@Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        idColumn.setCellValueFactory(new PropertyValueFactory<Person, Integer>("personID"));
-        firstNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
-        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
-        nickNameColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("nickName"));
-        eMailColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("mailAddress"));
-        personTable.getItems().setAll(getAllPersons());
-
-        personTable.getSelectionModel().selectedItemProperty().addListener((observableValue, person, t1) -> {
-            firstNameTextField.setText(personTable.getSelectionModel().getSelectedItem().getFirstName());
-            lastNameTextField.setText(personTable.getSelectionModel().getSelectedItem().getLastName());
-            nickNameTextField.setText(personTable.getSelectionModel().getSelectedItem().getNickName());
-            eMailTextField.setText(personTable.getSelectionModel().getSelectedItem().getMailAddress());
-        });
-    }*/
-
-    /*public void saveNewPersonButtonWasClicked() {
-            Person personToAdd = new Person(firstNameTextField.getText(), lastNameTextField.getText(),nickNameTextField.getText(), eMailTextField.getText());
-            addPerson(personToAdd);
-        }*/
-
-    /*public boolean addPerson(Person thePerson){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = null;
-        boolean isSuccess = true;
-
-        try{
-            transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.persist(thePerson);
-            transaction.commit();
-        }catch (Exception e){
-            if(transaction != null){
-                transaction.rollback();
-            }
-            e.printStackTrace();
-            isSuccess = false;
-        }finally {
-            entityManager.close();
-        }
-        return isSuccess;
-    }*/
-
-    /*public List<Person> getAllPersons() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = null;
-        List<Person> personList = null;
-
-        try {
-            transaction = entityManager.getTransaction();
-            transaction.begin();
-            TypedQuery<Person> allPersonsQuery = entityManager.createQuery("from Person", Person.class);
-            personList = allPersonsQuery.getResultList();
-            transaction.commit();
-
-        } catch (Exception e) {
-            if(transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            entityManager.close();
-        }
-        return personList;
-
-    }*/
-
-
